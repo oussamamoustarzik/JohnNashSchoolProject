@@ -14,7 +14,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
-import dj_database_url;
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -105,11 +104,10 @@ DATABASES = {
         'NAME': 'Nash',
         'USER': 'postgres',
         'PASSWORD': 'root',
-        'HOST': 'dpg-copceuf79t8c73fscopg-a.oregon-postgres.render.com', 
+        'HOST': '127.0.0.1', 
         'PORT': '5432',
     }
 } 
-DATABASES['default']=dj_database_url.parse("postgres://nash_user:qujYYeCPUIGQKjzt2uHg9O6CKMSzpjjw@dpg-copceuf79t8c73fscopg-a.oregon-postgres.render.com/nash")
 
 #postgres://nash_user:qujYYeCPUIGQKjzt2uHg9O6CKMSzpjjw@dpg-copceuf79t8c73fscopg-a.oregon-postgres.render.com/nash
 
