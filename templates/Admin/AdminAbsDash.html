@@ -1,0 +1,152 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css\Agent.css" %}'>
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+{% include 'Admin/AdminAbsence.html' %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    body {
+        background: rgb(226, 226, 226);
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin: 10px;
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .card:nth-child(1) {
+        background-color: #6fdade;
+    }
+
+    .card:nth-child(2) {
+        background-color: #8ad18b;
+    }
+
+    .card:nth-child(3) {
+        background-color: #e38e7b;
+    }
+
+    h2 {
+        margin: 0;
+        color: #708090;
+    }
+
+    p {
+        font-size: 30px;
+        margin: 10px 0;
+        color: Black;
+    }
+
+    .chart-container {
+        width: 200px;
+        height: 200px;
+        margin: 20px auto;
+        position: relative;
+    }
+</style>
+<body>
+<section class="home-section">
+    <div class="homepage" style="margin-left:150px;">
+        <div class="text">
+            <p>Welcome to Admin Space: {{ admin.compte }}<br></p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+            <h2>Total Students</h2>
+            <p>{{ eleves_count }}</p>
+            <div class="chart-container">
+                <canvas id="students-chart"></canvas>
+            </div>
+        </div>
+        <div class="card">
+            <h2>Present Students</h2>
+            <p>{{ present }}</p>
+            <div class="chart-container">
+                <canvas id="present-chart"></canvas>
+            </div>
+        </div>
+        <div class="card">
+            <h2>Absent Students</h2>
+            <p>{{ absent }}</p>
+            <div class="chart-container">
+                <canvas id="absent-chart"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Generate random colors for the charts
+    function generateRandomColors(count) {
+        var colors = [];
+        for (var i = 0; i < count; i++) {
+            var color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+            colors.push(color);
+        }
+        return colors;
+    }
+
+    // Initialize and configure the charts
+    function initializeCharts() {
+        var studentsCount = {{ eleves_count }};
+        var presentCount = {{ present }};
+        var absentCount = {{ absent }};
+
+        // Data for the charts
+        var data = {
+            labels: ['Students', 'Present', 'Absent'],
+            datasets: [{
+                data: [studentsCount, presentCount, absentCount],
+                backgroundColor: generateRandomColors(3)
+            }]
+        };
+
+        // Options for the charts
+        var options = {
+            responsive: true,
+            maintainAspectRatio: false
+        };
+
+        // Get the chart elements
+        var studentsChart = document.getElementById('students-chart').getContext('2d');
+        var presentChart = document.getElementById('present-chart').getContext('2d');
+        var absentChart = document.getElementById('absent-chart').getContext('2d');
+
+        // Create the charts
+        new Chart(studentsChart, { type: 'doughnut', data: data, options: options });
+        new Chart(presentChart, { type: 'doughnut', data: data, options: options });
+        new Chart(absentChart, { type: 'doughnut', data: data, options: options });
+    }
+
+    // Initialize the charts on page load
+    window.addEventListener('load', initializeCharts);
+</script>
+</body>
+</html>
+{% endblock %}

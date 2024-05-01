@@ -1,0 +1,144 @@
+{% include 'Admin/AdminElearning.html'%}
+
+<html>
+<body>
+<section class="home-section">
+  <h2 class="title">Levels</h2>
+
+  <div class="service" id="diag"><br><br><br>&emsp;
+    &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+    &emsp; &emsp;
+    <a class="add" href="{% url 'addclasse' %}">ADD NEW class</a> &emsp; &emsp; &emsp; &emsp; &emsp;&emsp; &emsp;&emsp; &emsp; &emsp; &emsp;
+    <a class="add"  href="{% url 'matierestotal' %}">Liste des matieres de tous les niveaux</a>
+    <div class="boxx">
+
+      {% for niveau in niveaux %}
+      <div class="cardd" style="{% if niveau == 'MS' or niveau == 'CP' or niveau == 'CE2' or niveau == 'CM2' %} {% endif %}">
+        </br></br>
+        <h5><a href="{% url 'classes' %}?niveau={{niveau}}" class="button">{{niveau}}</a></h5>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+<style>
+  .title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    top: 36px;
+    position: inherit;
+}
+  .boxx {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+    justify-content: space-between;
+    align-items: self-end;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 260px;
+    left: 60px;
+    cursor: pointer;
+  }
+a{
+      text-decoration: none;
+
+}
+  .add {
+    margin-bottom: 20rem;
+    padding: 4px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid #aabfe3;
+    background-color: #347dfa;
+    color: #f6f6fc;
+    margin-right: 8px;
+    text-decoration: none;
+
+  }
+  .add:hover{
+    color: #030303;
+    text-decoration: none;
+    background: #fff;
+    border-radius: 12px;
+
+  }
+
+  .boxx .add:hover {
+    background: #fff;
+    color: #005af5;
+    transition: 0.5rem;
+    box-shadow: 1px 1px 8px 4px #00040a;
+  }
+
+  .cardd {
+    flex: 0 0 calc(33.333% - 30px);
+    height: 50px;
+    width: 200px;
+    padding: 20px 35px;
+    background: linear-gradient(#fff427, #3881ff);
+    border-radius: 30px;
+    margin: 15px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+  .cardd:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .service h5 {
+    color: black;
+    padding: 3rem 0;
+    font-size: 2.1rem;
+    line-height: 0.8;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .pra p {
+    color: #ed5565;
+    font-size: 16px;
+    line-height: 27px;
+    margin-bottom: 25px;
+  }
+
+  .cardd a.button {
+    display: flex;
+    background-color: var(--light-color);
+    position: absolute;
+    top: 5px;
+    color: #2d0000;
+    text-decoration: none;
+    border: 2px solid transparent;
+    font-weight: bold;
+    padding: 10px 22px;
+    border-radius: 30px;
+    transition: 0.4s;
+    font-size: 19px;
+    align-items: baseline;
+    justify-content: center;
+    align-content: stretch;
+    flex-direction: column;
+    left: 21px;
+    width: 100%;
+
+  }
+
+  .cardd a.button:hover {
+    background-color: linear-gradient(#fffa9e, #76a4f3);;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+</style>
+
+</section>
+</body>
+</html>

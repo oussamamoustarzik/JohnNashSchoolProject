@@ -1,0 +1,99 @@
+{% include 'Prof/ProfElearning.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="attendance">
+    <div class="attendance-list">
+        <h1>Notes : {{eleve}} </h1>
+        <div class="form-group">
+            <input id="search" class="form-control" type="text" placeholder="Search.....">
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2" colspan="1">
+                        Matière
+                    </th>
+                    <th rowspan="2" colspan="1">
+                        SousMatière
+                    </th>
+                    <th rowspan="1" colspan="4">
+                        S1
+                    </th>
+                    <th rowspan="1" colspan="4">
+                        S2
+                    </th>
+                </tr>
+                <tr>
+                    <th>DS1</th>
+                    <th>DS2</th>
+                    <th>DS3</th>
+                    <th>Moy</th>
+                    <th>DS1</th>
+                    <th>DS2</th>
+                    <th>DS3</th>
+                    <th>Moy</th>
+                </tr>
+            </thead>
+
+            <tbody id="myTable">
+                {% for value in values %} 
+                    {% with value.0 as matiere %}   <!--  Français -->
+                    {% with value.1 as ssmatiere %}  <!--  <QuerySet [<SousMatiere: Conjugaison>, <SousMatiere: Grammaire>]> -->
+                    {% with value.2 as epreuve_list %} <!--  [(<Epreuve: 1>, <SousMatiere: Conjugaison>, 9), (<Epreuve: 2>, <SousMatiere: Conjugaison>, 12), (<Epreuve: 1>, <SousMatiere: Grammaire>, 13), (<Epreuve: 4>, <SousMatiere: Grammaire>, 14), (<Epreuve: 6>, <SousMatiere: Grammaire>, 15)] -->
+                    {% with value.3 as note_list %}   <!--  [(9, Decimal('10.00'), <Epreuve: 1>), (12, Decimal('9.00'), <Epreuve: 2>), (13, Decimal('7.00'), <Epreuve: 1>), (14, Decimal('10.00'), <Epreuve: 4>)] -->
+                        {% for ssma in ssmatiere %}
+                            <tr>
+                                {% if forloop.first %}
+                                    <td rowspan="{{ ssmatiere|length }}">{{ matiere }}</td>
+                                {% endif %}
+                                <td>{{ ssma }}</td>
+                                
+                                {% for i in "12374568" %}
+                               
+                                <td>  {% with sum=0 count=0 %}
+                                    {% for epr in epreuve_list %}
+                                        {% if epr.1 == ssma and epr.0|stringformat:"s" == i %}
+                                            {% for n in note_list %}
+                                                {% if n.2 == epr.0 %}
+                                                    {{ n.1 }}
+                                                    {% with sum=sum|add:n.1 count=count|add:1 %}
+                                                   {% endwith %}
+                                                   
+                                                {% endif %} 
+                                            {% endfor %}
+                                        {% endif %}      
+                                     {% endfor %}
+                                
+                                 {% if i == "7" or i == "8" %}
+                                     {% if count > 0 %}
+                                        {% with average=sum|divisibleby:count|stringformat:".2f" %}
+                                            {{ average }}
+                                        {% endwith %}
+                                     {% else %}
+                                         {{ "moy" }}
+                                     {% endif %}
+                                  {% endif %}
+
+                                  {% endwith %}
+                                </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    {% endwith %}
+                    {% endwith %}
+                    {% endwith %}
+                    {% endwith %}
+                {% endfor %}
+            </tbody>
+            
+            
+
+        </table>
+
+    </div>
+</section>
+
+{% endblock content %}

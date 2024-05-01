@@ -1,0 +1,182 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+</head>
+{% include 'Prof/ProfAbscence.html' %}
+<style>
+    /*  import google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body{
+  background: rgb(226, 226, 226);
+}
+.container{
+  display: flex;
+}
+
+/* MAin Section */
+.main{
+  position: relative;
+  padding: 20px;
+  width: 100%;
+}
+.main-top{
+  display: flex;
+  width: 100%;
+}
+.main-top i{
+  position: absolute;
+  right: 0;
+  margin: 10px 30px;
+  color: rgb(110, 109, 109);
+  cursor: pointer;
+}
+
+/*Attendance List serction  */
+.attendance{
+  margin-top: 20px;
+  text-transform: capitalize;
+}
+.attendance-list{
+  margin-left:100px;
+  width: 70%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.table{
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 15px;
+  min-width: 100%;
+  overflow: hidden;
+  border-radius: 5px 5px 0 0;
+}
+table thead tr{
+  color: #fff;
+  background: #5590cf;
+  text-align: left;
+  font-weight: bold;
+}
+.table th,
+.table td{
+  padding: 12px 15px;
+}
+.table tbody tr{
+  border-bottom: 1px solid #ddd;
+}
+.table tbody tr:nth-of-type(odd){
+  background: #f3f3f3;
+}
+.table tbody tr.active{
+  font-weight: bold;
+  color: #8DBFB0;
+}
+.table tbody tr:last-of-type{
+  border-bottom: 2px solid #5590cf;
+}
+.table button{
+  padding: 6px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #5590cf;
+}
+.table button:hover{
+  background: #5590cf;
+  color: #fff;
+  transition: 0.5rem;
+}
+
+/* Pagination */
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination a, .pagination span {
+  display: inline-block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #000;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination a:hover {
+  background-color: #ddd;
+}
+
+.pagination .current-page {
+  font-weight: bold;
+  background-color: #5590cf;
+  color: #fff;
+}
+</style>
+<body>
+<section class="home-section">
+  <div class="container">
+    <section class="main">
+      <section class="attendance">
+        <div class="attendance-list">
+          <h1>Attendance List</h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Student Classe</th>
+                <th>Student Name</th>
+                <th>Date</th>
+                <th>State</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for liste in  abs_students %}
+              {% if student.cne_eleve not in pres_students %}
+                <tr>
+                  <td>{{ liste.id_classe }}</td>
+                  <td>{{ liste.compte.nom }} {{ liste.compte.prenom }}</td>
+                  <td>{{ liste.date }}</td>
+                  <td>Absent</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+
+            {% for student, classe, date  in present_students %}
+              {% if classe == selected_class %}
+                <tr>
+                  <td>{{ classe }}</td>
+                  <td>{{ student}}</td>
+                  <td>{{ date }}</td>
+                  <td>Present</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+<script>
+
+</script>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% include 'Admin/AdminElearning.html'%}
+{%load static%}
+
+
+{%block content%}
+
+<section class="home-section"><br>
+
+<div class="form">
+  <form method="post" class="box">
+    <div class="new"><span>Edit Student</span></div>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="save" value="save" class="btn-save">Save</button>
+    <a href="{% url 'eleves' %}" role="button" data-dismiss="modal"class="btn-cancel" >Cancel</a>
+
+  </form>
+</div>
+<style>
+    .form {
+      padding: 10px 10px;
+      padding-bottom: 10px;
+      width: 500px;
+      min-height: 100px;
+      margin: 0 auto;
+    }
+  
+    .box {
+      background-color: #f6f6fc;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.2);
+      margin: 10 10;
+      padding-bottom: 20px;
+    }
+  
+    .box p {
+      margin-bottom: 10px;
+    }
+  
+    .box input[type="text"],
+    .box input[type="password"],
+    .box select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+    .new{
+      position: absolute;
+    margin-left: 110px;
+    font-size: 19px;
+    font-weight: 500;
+    border-radius: 20px;
+    top: 19px;
+    background-color: #bbbbbb;
+    height: 40px;
+    width: 200px;
+
+}
+span{
+margin-left: 40px;
+  justify-content: center;
+}
+    .box input[type="text"]:focus,
+    .box input[type="password"]:focus {
+      outline: none;
+      border-color: #4CAF50;
+      box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    }
+  
+    .btn-save,
+    .btn-cancel {
+      display: inline-block;
+      padding: 8px 16px;
+      margin-right: 10px;
+      text-decoration: none;
+      border-radius: 3px;
+      cursor: pointer;
+      color: #fff;
+    }
+  
+    .btn-save {
+      background-color: #4CAF50;
+      border: none;
+    }
+  
+    .btn-save:hover {
+      background-color: #45a049;
+    }
+  
+    .btn-cancel {
+      background-color: #888;
+      border: none;
+    }
+  
+    .btn-cancel:hover {
+      background-color: #555;
+    }
+  
+  </style>
+  </section>
+  {% endblock content %}

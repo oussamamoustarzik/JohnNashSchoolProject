@@ -1,0 +1,112 @@
+{% include 'Prof/ProfElearning.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<section class="attendance">
+  <div class="attendance-list">
+    <h1>Sous-matières enseignées du professeur {{ professeur }}</h1>
+   
+    <div class="form-group">
+      <input id="search" class="form-control" type="text" placeholder="Search.....">
+    </div>
+    <table>
+      <thead>
+        <tr>
+  <table>
+    <thead>
+      <tr>
+        <th>Classe</th>
+        <th>Matière</th>
+        <th>Sous-matière</th>
+        <th>Coefficient</th>
+        <th>Action</th>
+        <th>ajout sous matiere</th>
+      </tr>
+    </thead>
+    <tbody id="myTable">
+
+        {% for enseigne in enseignes %}   
+            <tr>
+        <td> {{enseigne.Id_classe}}</td>
+        
+        <td> {{enseigne.Id_matiere}}</td>
+          <td>  <div>
+            {% for sous_matiere in sousmatiere_list %}
+            {% if sous_matiere.matiere == enseigne.Id_matiere %}
+            {{ sous_matiere }}
+            
+             <br>{% endif %}
+              {% endfor %}
+                 </div>
+           </td>
+           <td>  <div>
+            {% for sous_matiere in sousmatiere_list %}
+            {% if sous_matiere.matiere == enseigne.Id_matiere %}
+            {{ sous_matiere.coefficient }}
+            
+             <br>{% endif %}
+              {% endfor %}
+                 </div>
+           </td>
+          <td>
+            {% for sous_matiere in sousmatiere_list %}
+            {% if sous_matiere.matiere == enseigne.Id_matiere %}
+                <a href="{% url 'coursprofs' %}?matiere={{ enseigne.Id_matiere }}&sous_matiere={{ sous_matiere }}">Liste des cours</a>
+                <a href="{% url 'updatessmatiere' sous_matiere.id_sousmatiere %}" role="button" >Edit</a>
+                <a href="#deleteEmployeeModal-{{sous_matiere.id_sousmatiere}}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"></i>Delete</a>
+                <br> {% endif %}
+                 <!-- Delete Modal HTML -->
+         <div id="deleteEmployeeModal-{{sous_matiere.id_sousmatiere}}" class="modal">
+          <div class="modal_content">
+            <form method="post" action="{% url 'delete_ssmatiere' sous_matiere.id_sousmatiere %}">
+              {% csrf_token %}
+              <div class="modal-header">						
+                <h4 class="modal-title">Delete Matiere</h4>
+                <a href="#" class="modal_close" data-dismiss="modal" aria-hidden="true">&times;</a>
+              </div>
+              <div class="modal-body">					
+                <p>Are you sure you want to delete these Records{{ sous_matiere.id_sousmatiere}}?</p>
+                <p class="text-warning"><small>This action cannot be undone.</small></p>
+              </div>
+              <div class="modal-footer">
+                <a href="{% url 'sousmatieres_professeur' %}" role="button" data-dismiss="modal">Cancel</a>
+                <button type="submit" >Confirmer la suppression</button>
+
+              </div>
+            </form>
+          </div>
+        </div>
+
+                {% endfor %}</td>
+           <td> <a  href="{% url 'addssmatiere' %}?matiere={{enseigne.Id_matiere}}">ADD NEW sousmatiere</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+        
+        
+        <div class="pagination">
+          <span class="step-links">
+              {% if page_obj.has_previous %}
+              <a href="?page=1">&laquo; first</a>
+              <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+              {% endif %}
+    
+              <span class="current">
+                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              </span>
+    
+              {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}">next</a>
+              <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+          </span>
+      </div>  
+        </div>
+          </section>
+
+    {%endblock content%}

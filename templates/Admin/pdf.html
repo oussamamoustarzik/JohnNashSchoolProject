@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Facture de paiement</title>
+    <style>
+      /* Ajoutez votre CSS personnalisé ici */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Payment invoice</h1>
+      <table>
+      <tr>
+        <th>Student name:</th>
+        <td>{{ nom_prenom }}</td>
+      </tr>
+        <tr>
+          <th>Payment reference:</th>
+          <td>{{ reference }}</td>
+        </tr>
+        <tr>
+          <th>Date:</th>
+          <td>{{ date_paiement }}</td>
+        </tr>
+        <tr>
+          <th>Fees:</th>
+          <td>{{ montant }}</td>
+        </tr>
+        <tr>
+          <th>Payment method:</th>
+          <td>{{ modeP }}</td>
+        </tr>
+        <tr>
+          <th>Service type:</th>
+          <td>{{ type_service }}</td>
+        </tr>
+        <tr>
+          <th>Month:</th>
+          <td>{{ mois_paiement }}</td>
+        </tr>
+        <tr>
+          <th>Student ID:</th>
+          <td>
+            {{ cne_eleve.cne_eleve  }}</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

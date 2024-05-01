@@ -1,0 +1,207 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scanner</title>
+</head>
+{% include 'Agent\AgentAbsence.html' %}
+<style>
+    a{
+        text-decoration: underline;
+    }
+    body {
+      background: #e4e9f7;}
+  .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    color: #ec1111;
+  }
+
+  .col {
+    flex: 1;
+    text-align: center;
+  }
+
+  #reader {
+    border: 2px solid #cccccc;
+    border-radius: 5px;
+    height: 400px;
+    width: 400px;
+  }
+
+  .result {
+    background-color: green;
+    color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+  }
+
+  h4 {
+    margin-top: 0;
+  }
+
+  form {
+    text-align: center;
+  }
+
+  .valider {
+    margin-left:720px;
+    background-color: #8DBFB0;
+    color: #2D0000;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+
+  .valider:hover {
+    background-color: #8DBFB0;
+  }
+
+  @media only screen and (max-width: 768px) {
+            .row {
+                flex-direction: column;
+            }
+            #reader {
+                height: 250px;
+                width: 250px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            .col {
+                padding: 20px;
+            }
+            img {
+                max-width: 200px;
+                margin: 20px auto;
+            }
+        }
+.gbutton{
+  background-color: #8DBFB0;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  color: #2D0000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.gbutton:hover {
+  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+.nbutton{
+  background-color: #8DBFB0;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  color: #2D0000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.nbutton:hover {
+  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+.obutton{
+  background-color: #8DBFB0;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  color: #2D0000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.obutton:hover {
+  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+.scan_form .alert {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 20px;
+}
+.scan_form .alert {
+  margin: 15px 0 0;
+  color: #000000;
+  font-size: 28px;
+  font-weight: bolder;
+  text-shadow:   -1px -1px 0 #5a442d,
+    1px -1px 0 #fcfaf9,
+    -1px 1px 0 #e9e8e8,
+     1px 1px 0 #eeeeee;
+}
+</style>
+<body>
+<section class="home-section">
+  <div class="row" >
+    <div class="col" style="margin-left:300px;">
+      <div style="width:500px;" id="reader"></div>
+    </div>
+  </div>
+  <form class="scan_form"method="POST" action="{% url 'scan1' %}">
+      {% csrf_token %}
+      <div id="result"></div>
+      </br>
+      <button class="valider"type="submit" style="display: none">Submit</button>
+      {% if message %}
+                    <div class="alert">{{ message }}</div>
+      {% endif %}
+
+      {% if success %}
+                    <div class="success">Scan saved successfully!</div>
+      {% endif %}
+  </form>
+</section>
+  <script src='{% static "js/scann.js" %}'></script>
+  <script type="text/javascript">
+  function onScanSuccess(qrCodeMessage) {
+      document.getElementById('result').innerHTML = `<input type='hidden' name="scan" class="result" value="${qrCodeMessage}">`;
+      document.querySelector(".valider").style.display="block";
+
+  }
+
+  function onScanError(errorMessage) {
+    //handle scan error
+  }
+
+  var html5QrcodeScanner = new Html5QrcodeScanner(
+      "reader", { fps: 10, qrbox: 250 });
+  html5QrcodeScanner.render(onScanSuccess, onScanError);
+
+  </script>
+</body>
+</html>

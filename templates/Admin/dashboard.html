@@ -1,0 +1,451 @@
+<!-- admin/dashboard.html -->
+
+{% include 'Admin/AdminElearning.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css\evo-calendar.min.css' %}">
+<link rel="stylesheet" href="{% static 'css\evo-calendar.midnight-blue.min.css' %}">
+<section class="home-section" >
+  <div class="header--wrapper">
+    <div class="header--title">
+      <span>Admin</span>
+      <h2>Dashboard</h2>
+    </div>
+  <div class="user--info">
+    <div class="search--box">
+    <i class="fa-solid fa-search"></i>
+    <input type="text" name="search" id="search" placeholder="search...">
+    </div>
+    <div class="notification-badge">
+      <i class="fas fa-bell"></i>
+      <span class="badge">3</span>
+    </div>
+ </div> <img src="{% static 'image/maternelle1.jpg' %}"></div>
+
+<div class="card--container" >
+  <h2 class="main--title">Today's Data</h2>
+  <div class="card--wrapper">
+    <div class="student--card">
+        <div class="card--header">
+<div class="Number">
+  <span class="title"> Students </span>
+   <span class="number">{{student_count}}</span>
+</div>
+<img src="{% static 'image/eleve_ecrivant.png' %}" class="img1">
+        </div>
+
+    </div>
+
+
+    <div class="student--card" style="background:#AABB5D;">
+      <div class="card--header">
+<div class="Number">
+<span class="title"> Teachers </span>
+ <span class="number">{{professor_count}}</span>
+</div>
+<img src="{% static 'image/Teacher.png' %}" class="img1">
+      </div>
+
+  </div>
+
+
+
+
+  <div class="student--card"style="background:#48CFAd ;">
+    <div class="card--header">
+<div class="Number">
+<span class="title"> Parents</span>
+<span class="number">{{parent_count}}</span>
+</div>
+<img src="{% static 'image/parent.png' %}" class="img1">
+    </div>
+
+</div>
+
+
+
+
+<div class="student--card " style="background:#AAB2BD;">
+  <div class="card--header">
+<div class="Number">
+<span class="title"> Classes </span>
+<span class="number">{{class_count}}</span>
+</div>
+<img src="{% static 'image/classes.png' %}" class="img1">
+  </div>
+
+</div>
+
+
+
+
+<div class="student--card " style="background:#AAB2BD;">
+  <div class="card--header">
+<div class="Number">
+<span class="title"> Add USers</span>
+<span class="number">{{class_count}}</span>
+</div>
+<img src="{% static 'image/classes.png' %}" class="img1">
+  </div>
+
+</div>
+
+
+
+
+
+  </div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+<div class="container">
+  <div class="row my-5">
+      <div class="col-md-6">
+          <div class="bg-white"><h3>Gender Statistics</h3>
+              <canvas id="myChart1" width="300" height="200"></canvas>
+
+              <script>
+                const genderStats = JSON.parse('{{ gender_stats|escapejs }}');
+                const labels = genderStats.map(stat => (stat.sexe === 1) ? 'Male' : 'Female');
+                const data = genderStats.map(stat => stat.count);
+            
+                const ctx = document.getElementById('myChart1').getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Gender Statistics',
+                            data: data,
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)',
+                            ],
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Gender Statistics',
+                                font: {
+                                    size: 16,
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        legend: {
+                            position: 'bottom', // Align the legend to the bottom
+                        },
+                        tooltips: {
+                            callbacks: {
+                                label: function (tooltipItem, data) {
+                                    var dataset = data.datasets[tooltipItem.datasetIndex];
+                                    var value = dataset.data[tooltipItem.index];
+                                    var label = data.labels[tooltipItem.index];
+                                    return label + ': ' + value;
+                                }
+                            }
+                        }
+                    }
+                });
+            </script>
+            
+            
+             </div>
+             
+          
+        </div>
+ 
+
+    </div> 
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="{ % static 'evo-calendar.min.js'%}"></script>
+<script>
+
+</script>
+</section>
+
+<style>
+ 
+.col-md-6 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin: 50px;
+    margin-left: 300px;
+}
+
+  .img1{
+    width: 60px;
+  height:60px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 1.5rem;
+
+
+  }
+  .number{
+    font-size: 24px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+  }
+  .Number{
+    display: flex;
+    flex-direction: column;
+
+  }
+  .title{
+    font-size: 16px;
+    font-weight: 900;
+
+  }
+  .card--header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .student--card{
+    background: #a0b7ca;
+    border-radius: 10px;
+    padding: 1.2rem;
+    width:290px;
+    height: 150px;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  .student--card:hover{
+    background-color: #cde2f7;
+  }
+  .main--title{
+    color: #708090;
+    padding-bottom:10px ;
+    font-size: 15px;
+    align-items: center;
+  }
+  .card--container{
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+  width: 100%;
+  }
+  .card--wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .stdnt{
+    width: 60px;
+  height:60px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 1.5rem;
+
+  }
+.header--wrapper img{
+  width: 50px;
+  height:50px;
+  cursor: pointer;
+  border-radius: 50%;
+
+}
+.header--wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 1rem;
+}
+.header--title{
+  color: #708090;
+}
+.user--info{
+  display: flex;
+  align-items: center;
+  gap: 1;
+}
+.search--box{
+  background: rgb(237,237, 237);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+}
+.search--box input{
+  background: transparent;
+  padding: 10px;
+border: transparent;
+}
+.search--box i{
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition:all 0.5s ease-out;
+}
+.search--box i:hover{
+  transform:scale(1.1);
+}
+.notification-badge {
+    position: relative;
+    margin-left: 10px;
+  }
+
+  .notification-badge .badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    padding: 4px 8px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    font-size: 12px;
+  }
+  body {
+    background-color: #f8f9fa;
+  }
+
+  .home-section {
+    padding: 50px 0;
+    text-align: center;
+  }
+
+  .animate-slide-in {
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .animate-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  }
+
+  .dashboard-item {
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    opacity: 0;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .dashboard-value {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .bg-primary {
+    background-color: #007bff;
+  }
+
+  .bg-success {
+    background-color: #28a745;
+  }
+
+  .bg-info {
+    background-color: #17a2b8;
+  }
+
+  .bg-warning {
+    background-color: #ffc107;
+  }
+
+  .bg-secondary {
+    background-color: #6c757d;
+  }
+
+  .dashboard-item:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+
+  .btn-primary:focus,
+  .btn-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  }
+
+  #myChart1 {
+        width: 500px; 
+        height: 500px; 
+        border: 1px solid #ddd; 
+        border-radius: 5px; 
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    }
+</style>
+
+
+<!-- Include Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<!-- Include Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+<script>
+  var animateDashboardItems = function () {
+    var items = document.querySelectorAll('.animate-fade-in');
+
+    anime({
+      targets: items,
+      opacity: 1,
+      delay: anime.stagger(100),
+      easing: 'easeInOutQuad',
+    });
+  };
+
+  var animateH2 = function () {
+    var h2Element = document.querySelector('.animate-slide-in');
+
+    anime({
+      targets: h2Element,
+      opacity: 1,
+      translateY: 0,
+      easing: 'easeOutExpo',
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    animateDashboardItems();
+    animateH2();
+  });
+</script>
+
+
+{% endblock content %}

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% load static %}
+    
+{% block content %}
+    
+
+<section class="subjects">
+
+    <h1 class="heading" >JohnNash In Numbers</h1>
+
+    <div class="box-container">
+
+    
+        <div class="box">
+            <img src="{% static 'image/pngegg.png'%}" alt="">
+            <h3>Students</h3>
+            <p>{{student}}</p>
+           
+        </div>
+
+        <div class="box">
+            <img src="{% static 'image/pngegg(6).png'%}" alt="">
+            <h3>Teachers</h3>
+            <p>{{prof}}</p>
+        </div>
+        <div class="box">
+            <img src="{% static 'image/pngegg (3).png'%}" alt="">
+            <h3>Schools</h3>
+            <p>{{school}}</p>
+        </div>
+        <div class="box">
+            <img src="{% static 'image/pngegg(7).png'%}" alt="">
+            <h3>Classes</h3>
+            <p>{{classes}}</p>
+        </div>
+        <div class="box">
+            <img src="{% static 'image/pngegg (1).png'%}" alt="">
+            <h3>Years Of Expertise</h3>
+            <p>{{annee_expertise}}</p>
+        </div>
+
+   
+
+    </div>
+
+</section>
+
+
+    
+    <!-- teacher section starts -->
+
+    <section class="teacher" id="teacher">
+
+        <div class="box-container">
+
+            <div class="box">
+                <div class="image">
+                    <img src="{% static 'image/robotics.jpg'%}" style="width: 443px; height: 570px;" alt="">
+                   <span>To inspire a love of learning, foster intellectual curiosity, and develop confident
+                        and compassionate individuals who are prepared to make a positive impact on the world.</span>
+                </div>
+                <div class="content">
+                    <h3>Our Vision</h3>
+                    
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img src="{% static 'image/science.jpg'%}"  style="width: 443px; height: 570px;" alt="">
+                      <span>At Jhon Nash School, we are committed to providing a challenging and engaging academic experience that prepares students for success in college and beyond.</p>
+                        We strive to create a supportive and inclusive community that fosters respect, kindness, and diversity, and we work closely with families to ensure that each child receives
+                        the individualized attention and support they need to succeed academically, socially, and emotionally.</span>
+                </div>
+                <div class="content">
+                    <h3>Our Mission</h3>
+                  
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img src="{% static 'image/draw.jpg'%}"  style="width: 443px; height: 570px;" alt="">
+                    <span>Community: We believe in creating a supportive and inclusive environment that fosters respect, kindness, and diversity.</span>
+                </div>
+                <div class="content">
+                    <h3>Our Values</h3>
+                   
+                </div>
+            </div>
+
+           
+
+        </div>
+
+    </section>
+
+    <!-- teacher section ends -->
+
+
+
+
+    
+    {% endblock content %}
+
+
+
+
+
+
+
+
+
+
+  

@@ -1,0 +1,345 @@
+{% include 'Admin/AdminElearning.html' %}
+{% load static %}
+
+
+
+<section class="home-section"><br>
+
+<div class="form">
+    <form method="post" class="box" id="regForm" action="{% url 'ajouteleve' %}">
+    {% csrf_token %}
+    <div class="new"><span>New  Student</span></div>
+    <div class="tab">
+      <label>{{form.username.label}}</label>
+      {{form.username}}
+      <label>{{form.password1.label}}</label>
+      {{form.password1}}
+      <label>{{form.password2.label}}</label>
+      {{form.password2}}
+    </div>
+    <div class="tab" style="display: none;">
+      <label>{{form.nom.label}}</label>
+      {{form.nom}}
+      <label>{{form.prenom.label}}</label>
+      {{form.prenom}}
+      <label>{{form.email.label}}</label>
+      {{form.email}}
+      <label>{{form.adresse.label}}</label>
+      {{form.adresse}}
+      <label>{{form.tel.label}}</label>
+      {{form.tel}}
+    </div>
+
+
+    <div class="tab" style="display: none;">
+      <label>{{form.lieu_naissance.label}}</label>
+      {{form.lieu_naissance}}
+      <label>{{form.date_naissance.label}}</label>
+      {{form.date_naissance}}
+      <label>{{form.gender.label}}</label>
+      {{form.gender}}
+      <label>{{form.nationnalite.label}}</label>
+      {{form.nationnalite}}
+      <label>{{form.CNE.label}}</label>
+      {{form.CNE}}
+      <label>{{form.Classe.label}}</label>
+      {{form.Classe}}
+      <label>{{form.parent.label}}</label>
+      {{form.parent}}
+    </div>
+    <div style="overflow:auto;">
+      <div style="float:right;">
+        <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="Previous">Previous</button>
+        <button type="button" id="nextBtn" name="save" onclick="nextPrev(1)" class="next">Next</button>
+      </div>
+      <div id="custom-alert" class="custom-alert" style="display: none;">
+        <div class="alert-content">
+          <h3>Error</h3>
+          <ul class="error-list">
+            {% for field in form %}
+              {% if field.errors %}
+                {% for error in field.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+          </ul>
+          <button onclick="closeAlert()">OK</button>
+        </div>
+      </div>
+    </div>
+    <button type="submit" name="save" value="save" class="btn-save" style="display: none;">Save</button>
+    <a href="{% url 'eleves' %}" role="button"  class="btn-cancel" data-dismiss="modal">Cancel</a>
+
+  </form>
+  <div style="text-align:center;margin-top:40px;">
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+
+  </div>
+</div>
+</section>
+<script>
+  var currentTab = 0;
+  showTab(currentTab);
+
+  function showTab(n) {
+    var x = document.getElementsByClassName("tab");
+    x[n].style.display = "block";
+
+    if (n == 0) {
+      document.getElementById("prevBtn").style.display = 'none';
+    } else {
+      document.getElementById("prevBtn").style.display = "inline";
+    }
+
+    if (n == (x.length - 1)) {
+      document.getElementById("nextBtn").innerHTML = "Save";
+    } else {
+      document.getElementById("nextBtn").innerHTML = "Next";
+    }
+
+    fixStepIndicator(n);
+  }
+
+  function nextPrev(n) {
+    var x = document.getElementsByClassName("tab");
+    if (n == 1 && !validateForm()) return false;
+
+    x[currentTab].style.display = "none";
+    currentTab = currentTab + n;
+
+    if (currentTab >= x.length) {
+      document.getElementById("regForm").submit(); 
+      return false;
+
+    }
+
+    showTab(currentTab);
+  }
+
+  function validateForm() {
+    var x, y, i, valid = true;
+    x = document.getElementsByClassName("tab");
+    y = x[currentTab].getElementsByTagName("input");
+
+    for (i = 0; i < y.length; i++) {
+      if (y[i].value == "") {
+        y[i].className += " invalid";
+        valid = false;
+      }
+    }
+
+    if (valid) {
+      document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+
+    return valid;
+   
+
+  }
+
+  function fixStepIndicator(n) {
+    var i, x = document.getElementsByClassName("step");
+
+    for (i = 0; i < x.length; i++) {
+      x[i].className = x[i].className.replace(" active", "");
+    }
+
+    x[n].className += " active";
+  }
+
+  function openAlert() {
+var customAlert = document.getElementById('custom-alert');
+customAlert.style.display = 'block';
+}
+
+function closeAlert() {
+var customAlert = document.getElementById('custom-alert');
+customAlert.style.display = 'none';
+}
+
+var errorList = document.querySelector('.error-list');
+if (errorList && errorList.children.length > 0) {
+openAlert();
+}
+
+</script>
+<style>
+  .form {
+    width: 800px;
+    margin: 0 auto;
+  }
+
+  .box {
+    background-color: #f6f6fc;
+    padding: 20px;
+    margin-block:100px ;
+    border-radius: 8px;
+    box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .box p {
+    margin-bottom: 10px;
+  }
+
+  .box input[type="text"],
+  .box input[type="password"],
+  .box input[type="email"],
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+
+  .box input[type="text"]:focus,
+  .box input[type="password"]:focus,
+  .box select:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  }
+
+  .btn-save,
+  .btn-cancel {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-right: 10px;
+    text-decoration: none;
+    border-radius: 3px;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .btn-save {
+    background-color: #4CAF50;
+    border: none;
+  }
+
+  .btn-save:hover {
+    background-color: #45a049;
+  }
+
+  .btn-cancel {
+    background-color: #888;
+    border: none;
+  }
+
+  .btn-cancel:hover {
+    background-color: #555;
+  }
+  .error-list {
+    color: #000000;
+  margin-top: 5px;
+  margin-left: 10px;
+    margin-block: 10px;
+}
+.tab {
+  display: none;
+}
+
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+.step.finish {
+  background-color: #04AA6D;
+}
+.next{
+  padding: 10px 4px;
+  background-color: #04AA6D;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #f6f6fc;
+  margin-block: 10px;
+}
+.next:hover{
+  background-color: #36db9f;
+
+}
+.Previous{
+  padding: 10px 4px;
+  background-color: #f1886d;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #f6f6fc;
+  margin-block: 10px;
+
+}
+.Previous:hover{
+  background-color: #f7633e;
+
+}
+.custom-alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.custom-alert .alert-content {
+  margin-bottom: 20px;
+}
+
+.custom-alert h3 {
+  margin-top: 0;
+}
+
+.custom-alert .error-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.custom-alert button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.custom-alert button:hover {
+  background-color: #0056b3;
+}.new{
+  position: absolute;
+  margin-left: 290px;
+  font-size: 19px;
+  font-weight: 500;
+  border-radius: 20px;
+  top: 110px;
+  background-color: #bbbbbb;
+  height: 40px;
+  width: 200px;
+
+}
+span{
+margin-left: 40px;
+  justify-content: center;
+}
+</style>

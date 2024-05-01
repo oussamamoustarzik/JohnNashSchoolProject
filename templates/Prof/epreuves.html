@@ -1,0 +1,84 @@
+{% include 'Prof/ProfElearning.html'%}
+{% load static %} 
+
+{%block content%}
+
+
+      <section class="attendance">
+        <div class="attendance-list">
+          <h1>Liste des epreuves</h1>
+          <a class="add"  href="{% url 'addepreuve' %}">ADD NEW</a>
+          <div class="form-group">
+            <input id="search"  class="form-control"  type="text" placeholder="Search.....">
+        </div> 
+    
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>id_epreuve</th>
+                    <th>classe</th>
+                    <th>matiere</th>
+                    <th>Sous Matière</th>
+                    <th> nom_epreuve</th>
+                    <th>date_epreuve</th>
+                    <th> nature_epreuve</th>
+                    <th> Action</th>
+                    
+                    
+                </tr>
+               
+         
+        </thead>
+        <tbody id="myTable">
+            {% for epreuves in epreuves  %}
+            <tr>
+                <td>{{ epreuves.epreuve.id_epreuve }}</td>
+                <td> {% for cl in classe  %} {% if cl.epreuve_id == epreuves.epreuve_id %} {{cl}} {% endif %} {% endfor %}</td>
+                <td>{{ epreuves.sousmatiere.matiere}}</td>
+                <td>{{ epreuves.sousmatiere }}</td>
+                <td>{{ epreuves.epreuve.nom_epreuve }}</td>
+                <td>{{ epreuves.epreuve.date_epreuve }}</td>
+                <td>{{ epreuves.epreuve.nature_epreuve }}</td>
+                <td>
+                  <div >  
+                    <a href="{% url 'addnote' %}?epreuve={{ epreuves.epreuve.id_epreuve }}" role="button">Note</a>
+                    <a href="{% url 'updateepreuve' epreuves.epreuve.id_epreuve %}" role="button" >Edit</a>
+                     <a href="#deleteEpreuveModal-{{epreuves.epreuve.id_epreuve}}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"></i>Delete</a>
+
+                  </div>
+                </td>
+              
+                
+            </tr>
+              <!-- Delete Modal HTML -->
+            <div id="deleteEpreuveModal-{{epreuves.epreuve.id_epreuve}}" class="modal">
+              <div class="modal_content">
+                <h1>Hello</h1>
+                <form method="post" action="{% url 'deleteepreuve' epreuves.epreuve.id_epreuve%}" >          
+                          {% csrf_token %}
+                  <div class="modal-header">						
+                    <h4 class="modal-title">Delete Class</h4>
+                    <a href="#" class="modal_close" data-dismiss="modal" aria-hidden="true">&times;</a>
+                  </div>
+                  <div class="modal-body">					
+                    <p>Are you sure you want to delete these Records{{ epreuves.epreuve.id_epreuve }}?</p>
+                    <p class="text-warning"><small>This action cannot be undone.</small></p>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="{% url 'epreuves' %}" role="button" data-dismiss="modal">Cancel</a>
+                    <button type="submit" >Confirmer la suppression</button>
+
+                  </div>
+                </form>
+              </div>
+            </div>
+            {% endfor %}
+          
+        </tbody>
+       
+    </table>
+  </div>
+</section>
+{%endblock content%}

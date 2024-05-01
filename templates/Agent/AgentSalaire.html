@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+</head>
+{% include 'Admin/AdminPaiement.html' %}
+<style>
+  /* Style pour le conteneur du formulaire */
+  .form {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-left: 200px; /* Update the margin-left value to adjust the form position */
+    padding: 50px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  }
+
+  /* Style pour le formulaire */
+ 
+
+  /* Style pour les étiquettes des champs de saisie */
+  label {
+    position: absolute;
+    margin-top: 10px;
+    text-align: right;
+  }
+
+  /* Style pour les champs de saisie */
+  input, textarea, select {
+    width: 60%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-left: 160px;
+    margin-bottom: 10px; /* Added margin bottom for spacing */
+  }
+
+  /* Style pour le bouton */
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  /* Style pour le bouton lorsqu'il est survolé */
+  button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+
+  /* Additional styles to center the form */
+  body {
+    
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  
+</style>
+<body>
+  <section class="home-section">
+    <div class="container">
+      <section class="main">
+        <section class="attendance">
+          <div class="attendance-list">
+           <br><br><br>
+            <form method="POST" class="form">
+              {% csrf_token %}
+              
+              {{ form.as_p }}
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </section>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

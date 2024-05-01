@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homework</title>
+    {% include 'Eleve/EleveElearning.html' %}
+
+    <style>
+          .title {
+text-align: center;
+font-size: 24px;
+margin-bottom: 20px;
+}
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .submit-form {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .submit-form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .submit-form input[type="file"] {
+            margin-bottom: 10px;
+            padding: 10px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #ffffff;
+        }
+
+        .submit-form input[type="file"]:focus {
+            outline: none;
+            border-color: #337ab7;
+        }
+
+        .submit-form button {
+            padding: 10px 20px;
+            background-color: #337ab7;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .submit-form button:hover {
+            background-color: #23527c;
+        }
+
+    </style>
+</head>
+<body>
+<section class="home-section">
+    <h1 class="title">HomeWork</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Instruction</th>
+                <th>Date Limite</th>
+                <th>Contenue</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for devoir in devoirs %}
+                <tr>
+                    <form method="post" enctype="multipart/form-data" action="{% url 'sbm' devoir_id=devoir.id_devoir %}" class="submit-form">
+                        {% csrf_token %}
+                        <td>{{ devoir.id_devoir }}</td>
+                        <td>{{ devoir.description }}</td>
+                        <td>{{ devoir.instruction }}</td>
+                        <td></td>
+                        <td>
+                            <label for="pdf_file">Upload The Homework:</label>
+                            <input type="file" name="pdf_file" id="pdf_file" accept=".pdf">
+                        </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="submit-form">
+        <button type="submit">Submit</button>
+    </div>
+</section>
+</body>
+</html>

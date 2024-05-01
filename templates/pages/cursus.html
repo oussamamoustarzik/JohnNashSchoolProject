@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+    
+{% load static %} 
+
+{% block content %}
+    
+
+    <section class="cursus" id="cursus" >
+       
+        <h1 class="heading">JohnNash Elementary School</h1>
+
+        <div class="container">
+
+            <figure class="cursus-image">
+             
+                <img src="{% static 'image/maternelle1.jpg' %}" alt="" height="300"  >
+       
+             
+            </figure>
+
+            <div class="cursus-content">
+                <h3>Jhon Nash Kindergarten:</h3>
+                <p>Jhon Nash Kindergarten is a warm and welcoming school where children are encouraged to explore, learn, and grow in a safe and nurturing environment. Our experienced and caring faculty use a play-based approach to learning that promotes creativity, curiosity, and social-emotional development.</p>
+
+                     <p>Our kindergarten program is designed to help children build a strong foundation of skills and knowledge that will support their future academic and personal success. We provide a variety of learning experiences that promote reading, writing, mathematics, science, social studies, art, music, and physical education, as well as opportunities for outdoor play and exploration.</p>
+                     <p>At Jhon Nash Kindergarten, we recognize that every child is unique, 
+                        and we strive to create a learning environment that supports each child's individual needs and interests. We work closely with families to provide a smooth transition to elementary school and to promote a love of learning that will last a lifetime.</p> 
+            
+            </div>
+            
+
+        </div>
+        <div class="container">
+
+           
+            <div class="cursus-content">
+                
+                <h3>John Nash Primary: </h3>
+                <p>At Jhon Nash Primary, we believe in providing a nurturing and engaging environment that inspires a love of learning and sets the foundation for academic success. Our experienced and dedicated faculty work closely with students to provide a comprehensive curriculum that encompasses language arts, mathematics, science, social studies, and the arts. We also offer specialized instruction in areas such as technology, physical education, and foreign language, to ensure that students receive a well-rounded education.</p>
+                <p> Our classrooms are equipped with the latest educational technology and resources to support student learning, and our experienced support staff provides a range of services to help students overcome challenges and achieve their full potential. We also offer a variety of extracurricular programs, including sports teams, music and theater groups, and academic clubs, to allow students to explore their interests and develop their talents outside of the classroom.</p>
+                <p> At Jhon Nash Primary, we believe that every child is unique, and we are committed to providing a supportive and inclusive environment that fosters respect, kindness, and diversity. We work closely with families to ensure that each child receives the individualized attention and support they need to succeed academically, socially, and emotionally.</p>
+                     
+                    
+            </div>
+             <figure class="cursus-image">
+             
+            
+                <img src="{% static 'image/primaire.jpg' %}" alt="" height="500" >
+             
+            </figure>
+
+
+        </div>
+
+    </section>
+
+   
+
+
+   
+
+
+    
+    {% endblock content %}
+
+
+
+
+
+
+
+
+
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- custom js -->
+    <script src="js/script.js"></script>
+</body>
+</html>

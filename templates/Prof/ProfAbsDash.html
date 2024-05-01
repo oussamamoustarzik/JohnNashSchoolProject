@@ -1,0 +1,144 @@
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href='{% static "css/Agent.css" %}'>
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+{% include 'Prof/ProfAbscence.html' %}
+<style>
+  /* import google fonts */
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+  * {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  body {
+    background: rgb(226, 226, 226);
+  }
+  .container {
+    display: flex;
+  }
+  /* MAin Section */
+  .main {
+    position: relative;
+    padding: 20px;
+    width: 100%;
+  }
+  .main-top {
+    display: flex;
+    width: 100%;
+  }
+  .main-top i {
+    position: absolute;
+    right: 0;
+    margin: 10px 30px;
+    color: rgb(110, 109, 109);
+    cursor: pointer;
+  }
+  /* Attendance List section  */
+  .attendance {
+    margin-top: 20px;
+    text-transform: capitalize;
+  }
+  .attendance-list {
+    margin-left: 100px;
+    width: 70%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  }
+  .table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 15px;
+    min-width: 100%;
+    overflow: hidden;
+    border-radius: 5px 5px 0 0;
+  }
+  table thead tr {
+    color: #fff;
+    background: #5590cf;
+    text-align: left;
+    font-weight: bold;
+  }
+  .table th,
+  .table td {
+    padding: 12px 15px;
+  }
+  .table tbody tr {
+    border-bottom: 1px solid #ddd;
+  }
+  .table tbody tr:nth-of-type(odd) {
+    background: #f3f3f3;
+  }
+  .table tbody tr.active {
+    font-weight: bold;
+    color: #5590cf;
+  }
+  .table tbody tr:last-of-type {
+    border-bottom: 2px solid #5590cf;
+  }
+  .button-33 {
+    background-color: #5590cf;
+    border-radius: 100px;
+    box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  .button-33:hover {
+    box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset,rgba(44, 187, 99, .25) 0 1px 2px,rgba(44, 187, 99, .25) 0 2px 4px,rgba(44, 187, 99, .25) 0 4px 8px,rgba(44, 187, 99, .25) 0 8px 16px,rgba(44, 187, 99, .25) 0 16px 32px;
+    transform: scale(1.05) rotate(-1deg);
+  }
+  .imga {
+    position: fixed;
+    right: 8%;
+    top: 10%;
+    margin-right:100px;
+  }
+  .text p {
+    color: black;
+    position: absolute;
+    top: 30%;
+  }
+</style>
+<body>
+  <section class="home-section">
+    <div class="homepage" style="margin-left:100px;">
+      <div class="text">
+        <p>Welcome to teacher space: {{prof.compte.nom}}
+          <button class="button-33"><a href="{% url 'ProfClassesList' %}" style="text-decoration: none;color: black;">Your classes</a></button>
+        </p>
+      </div>
+      <div class="imga">
+        <img src="{% static '/image/logoteacher.png' %}" width="300px;" height="300px;" alt="">
+      </div>
+    </div>
+  </section>
+  <script src='{% static "/js/script1.js" %}'></script>
+</body>
+</html>
+{% endblock %}

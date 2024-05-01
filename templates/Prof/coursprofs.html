@@ -1,0 +1,94 @@
+{% include 'Prof/ProfElearning.html' %}
+{% load static %} 
+
+{% block content %}
+<section class="home-section"><br>
+    <div class="attendance-list">
+      <h1>Liste des Cours pour la sous matiere : {{sous_matiere}} </h1>
+      <td>
+        <a class="add" href="{% url 'addcours'%}?ssmatiere={{sous_matiere}} "  >Ajoutercours</a> 
+      </td>
+          <div class="form-group">
+            <input id="search"  class="form-control"  type="text" placeholder="Search.....">
+        </div> 
+    
+    <table>
+        <thead>
+            <tr>
+                <th>libelle</th>
+                <th> lien_cours</th>
+                <th> pdf_cours</th>
+                <th> Download</th>
+                <th> Action</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            {% for courss in cours_list  %}
+            <tr>
+                <td>{{ courss.libelle }}</td>
+                <td><a href="{{ courss.lien_cours }}">{{ courss.lien_cours }}</a></td>
+                <td>{{ courss.pdf_cours }}</td>
+                <td>
+                    <div>  
+                    {% if courss.pdf_cours %}
+                        <a href="{{ courss.pdf_cours.url }}" download>Download</a>
+                    {% endif %}
+                    </div>
+                </td>
+                
+           
+            <td>
+            <div>
+               <a href="{% url 'updatecours' courss.id_cours %}" class="btn">Edit</a>
+                <a href="#deleteEmployeeModal-{{courss.id_cours}}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete"></i>Delete</a>
+                  </div>
+                </td>
+              
+                
+            </tr>
+             <!-- Delete Modal HTML -->
+             <div id="deleteEmployeeModal-{{courss.id_cours}}" class="modal">
+                <div class="modal_content">
+                  <form method="post" action="{% url 'deletecours' courss.id_cours %}">                  {% csrf_token %}
+                    <div class="modal-header">						
+                      <h4 class="modal-title">Delete Cours</h4>
+                      <a href="#" class="modal_close" data-dismiss="modal" aria-hidden="true">&times;</a>
+                    </div>
+                    <div class="modal-body">					
+                      <p>Are you sure you want to delete these Records{{ courss.id_cours }}?</p>
+                      <p class="text-warning"><small>This action cannot be undone.</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{% url 'coursprofs' %}?matiere={{ matiere }}&sous_matiere={{sous_matiere}}" role="button" data-dismiss="modal">Cancel</a>                       
+                              <button type="submit" >Confirmer la suppression</button>
+  
+                    </div>
+                </form>
+              </div>
+            </div>
+            {% endfor %} 
+        </tbody>
+       
+    </table>
+   
+      <!--Pagination-->
+      <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+  
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+  
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+  <!--EndPagination-->    
+  </div></section>
+  {% endblock content %}

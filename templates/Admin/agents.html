@@ -1,0 +1,358 @@
+  
+{% include 'Admin/AdminElearning.html'%}
+{%load static%}
+
+<style>
+  .attendance {
+    position: relative;
+    text-transform: capitalize;
+    top: 80px;
+    margin-left: 130px;
+  }
+
+  .attendance-list {
+    width: fit-content;
+    padding: 30px;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin-left: 75px;
+    align-items: center;
+  }
+
+  .attendance-list h1 {
+    color: rgb(49, 48, 82);
+    margin-bottom: 40px;
+    margin-left: 400px;
+    text-shadow: 1px 2px 4px #adabaf;
+    font-size: 26px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .attendance-list .add {
+    margin-left: 51rem;
+    padding: 4px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid #4cf592;
+    background-color: #4cf592;
+    color: #f6f6fc;
+    margin-right: 8px;
+    text-decoration: none;
+  }
+
+  .attendance-list .add:hover {
+    background: #1bfd796e;
+    color: #0c0c0c;
+    transition: 0.5s;
+    box-shadow: 1px 1px 8px 4px #aabfe3;
+  }
+
+  table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    max-width: fit-content;
+    overflow: hidden;
+    border-radius: 8px 5px 0 0;
+    box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  table thead tr {
+    color: #fff;
+    background: #3d5a80;
+    text-align: center;
+  }
+
+  table th {
+    padding: 8px 20px;
+  }
+
+  table td {
+    padding: 16px 20px;
+  }
+
+  table tbody tr {
+    border-bottom: 1px solid #f6f6fc;
+  }
+
+  table tbody tr:nth-of-type(odd) {
+    background: #f6f6fc;
+  }
+
+  table tbody tr.active {
+    font-weight: bold;
+    color: #aabfe3;
+  }
+
+  table tbody tr:last-of-type {
+    border-bottom: 2px solid #aabfe3;
+  }
+
+  table a {
+    padding: 4px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid #3987bb;
+    background-color: #3987bb;
+    color: #f6f6fc;
+    margin-right: 8px;
+    text-decoration: none;
+  }
+
+  table a:hover {
+    background: #3987bb;
+    color: #ffffff;
+    transition: 0.5s;
+    box-shadow: 1px 1px 8px 4px #aabfe3;
+  }
+
+  .modal {
+    visibility: hidden;
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s;
+    position: fixed;
+  }
+
+  .modal:target {
+    visibility: visible;
+    opacity: 1;
+    background-size: cover;
+    background-color: rgba(77, 77, 77, 0.7);
+  }
+
+  input#search {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+
+  input#search:focus {
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  }
+
+  .modal_content {
+    border-radius: 4px;
+    position: relative;
+    width: 500px;
+    max-width: 90%;
+    background: white;
+    padding: 1.5em 2em;
+  }
+
+  .modal_content h1 {
+    position: relative;
+    margin-left: 155px;
+  }
+
+  .modal_content h4 {
+    position: relative;
+    margin-left: 155px;
+  }
+
+  .modal_close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: grey;
+    text-decoration: none;
+  }
+
+  .modal_close {
+    color: #888;
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .modal_close:hover,
+  .modal_close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .modal-body {
+    margin-bottom: 20px;
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .pagination {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .step-links {
+    display: inline-block;
+    margin: 0 5px;
+  }
+
+  .step-links a {
+    color: #4caf50;
+    text-decoration: none;
+    padding: 8px 12px;
+  }
+
+  .step-links .current {
+    font-weight: bold;
+  }
+
+  .step-links a:hover {
+    background-color: #4caf50;
+    color: #fff;
+    border-radius: 3px;
+  }
+
+  .step-links a:first-child {
+    margin-right: 10px;
+  }
+
+  .step-links a:last-child {
+    margin-left: 10px;
+  }
+
+  .modal-footer a {
+    padding: 8px 16px;
+    margin-left: 10px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .modal-footer a:first-child {
+    background-color: #888;
+  }
+
+  .modal-footer a:hover {
+    background-color: #45a049;
+  }
+
+  .modal-footer a:first-child:hover {
+    background-color: #555;
+  }
+</style>
+
+
+
+          
+  <section class="home-section">
+  <br><br><br>
+  &emsp;&emsp;
+  <div class="attendance-list">
+    <h1>Liste des agents</h1>
+    <a class="add" href="{% url 'ajoutagent' %}">ADD NEW</a>
+    <div class="form-group">
+      <input id="search" class="form-control" type="text" placeholder="Search.....">
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Agent</th>
+          <th>CIN</th>
+          <th>Email</th>
+          <th>Tel</th>
+          <th>Adresse</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="myTable">
+        {% if agent_list %}
+        {% for agent in agent_list %}
+        <tr>
+          <td>{{ agent.compte_id}}</td>
+          <td>{{ agent.compte}}</td>
+          <td>{{ agent.cin_agent}}</td>
+          <td>{{ agent.compte.email}}</td>
+          <td>{{ agent.compte.tel}}</td>
+          <td>{{ agent.compte.adresse}}</td>
+          <td>
+            <div>
+              <a href="{% url 'editagent' agent.compte_id %}" role="button">Edit</a>
+              <a href="#deleteEmployeeModal-{{agent.compte.id_user}}" class="delete" data-toggle="modal"><i
+                  class="material-icons" data-toggle="tooltip" title="Delete"></i>Delete</a>
+            </div>
+          </td>
+        </tr>
+
+        <!-- Delete Modal HTML -->
+        <div id="deleteEmployeeModal-{{agent.compte.id_user}}" class="modal">
+          <div class="modal_content">
+            <h1>Hello</h1>
+            <form action="{% url 'deleteagent' agent.compte.id_user %}" method="post">
+              {% csrf_token %}
+              <div class="modal-header">
+                <h4 class="modal-title">Delete Employee</h4>
+                <a href="#" class="modal_close" data-dismiss="modal" aria-hidden="true">&times;</a>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete these Records {{ agent.compte }}?</p>
+                <p class="text-warning"><small>This action cannot be undone.</small></p>
+              </div>
+              <div class="modal-footer">
+                <a href="{% url 'agents' %}" role="button" data-dismiss="modal">Cancel</a>
+                <a href="{% url 'deleteagent' agent.compte.id_user %}" role="button">Delete</a>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        {% endfor %}
+        {% else %}
+        <tr>
+          <td colspan="7">Aucun agent existant</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+    <!--Pagination-->
+    <div class="pagination">
+      <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+      </span>
+    </div>
+    <!--EndPagination-->
+  </div>
+</section>
+
+<script>
+  $(document).ready(function(){
+    // Activate tooltip
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+</script>

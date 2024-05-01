@@ -1,0 +1,179 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="fr">
+<head> {% block content %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Qr Code</title>
+    <link rel="stylesheet" href="{% static 'css\generateur.css' %}">
+    <link rel="stylesheet" href="{% static 'css\generateur1.css' %}">
+</head>
+{% include 'Admin\AdminAbsence.html' %}
+<style>
+        body {
+            background: #e4e9f7;;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .corps {
+            margin-top: 70px;
+            margin-left: 200px;
+        }
+
+        .formulaire {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .titre {
+            font-weight: bold;
+            color:#708090;
+        }
+
+        .input-nom-prenom {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .titre-input {
+            margin-bottom: 10px;
+        }
+
+        .epsilon {
+            display: none;
+        }
+
+        .code_qr {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #708090;
+            color: #2D0000;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #708090;
+        }
+        .form1 .alert {
+          margin: 15px 0 0;
+          color: #000000;
+          font-size: 28px;
+          font-weight: bolder;
+          text-shadow:   -1px -1px 0 #5a442d,
+            1px -1px 0 #fcfaf9,
+            -1px 1px 0 #e9e8e8,
+             1px 1px 0 #eeeeee;
+        }
+    </style>
+
+<body>
+<section class="home-section">
+    <div class="corps">
+        <div class="formulaire" name="formulaire">
+            <div class="titre">Inscription</div>
+            </br>
+            <form action="{% url 'GenerateurAdmin' %}" method="POST" name="form1" >
+                <div class="input-nom-prenom" >
+                    <div class="titre-input1" >
+                        <p class="titre">Prenom</p>
+                        <input type="text" name="Prenom" class="form-control"   oninput="change(this)" required>
+                    </div>
+                    <div class="titre-input2" >
+                        <p class="titre">Nom</p>
+                        <input type="text" name="Nom" oninput="change(this)" class="form-control" required>
+                    </div>
+                </div>
+                <div class="input-nom-prenom" >
+                    <div class="titre-input1" >
+                        <p class="titre">Cin Parent </p>
+                        <input type="tel"  class="form-control" oninput="change(this)" name="Numero" required >
+                    </div>
+                </div>
+                <div class="titre-input" >
+                    <p class="titre">CNE</p>
+                    <input type="text" name="cne" class="form-control"oninput="change(this)"   required>
+                </div>
+                <div class="titre-input" >
+                    <p class="titre">Classe</p>
+                    <!--<input type="number"  name="classe" oninput="change(this)" class="form-control" required >-->
+                    <select name="classe" class="form-control" required>
+                      {% for choice in classe %}
+                        <option value="{{ choice.id_classe }}">{{ choice.niveau_classe }} ({{ choice.id_classe }})</option>
+                      {% endfor %}
+                    </select>
+                </div>
+                <button onclick="QrCodeGen()" type="button">Generate</button>
+                <form action="{% url 'inscription' %}" method="post">{%csrf_token%}
+                <div class="epsilon" style="display: none;"></div>
+                <button type="submit">valider</button>
+                </form>
+                {% if message %}
+                    <div class="alert" style="margin: 15px 0 0; color: #000000;font-size: 28px;font-weight: bolder;text-shadow:   -1px -1px 0 #5a442d,1px -1px 0 #fcfaf9,-1px 1px 0 #e9e8e8,1px 1px 0 #eeeeee;">{{ message }}</div>
+                {% endif %}
+
+                {% if success %}
+                    <div class="success">Valide</div>
+                {% endif %}
+        </form>
+        </div>
+        <div class="code_qr">
+            <img class="lol" src="">
+            <button type="submit" style="display: none;" class="eps">valider</button>
+
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    function generateRandomCode(length) {
+        let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return result;
+    }
+
+    function updateQRCodeDisplay(code) {
+        let img = document.querySelector(".lol");
+        img.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${code}`;
+    }
+
+    function submitFormWithQRCode(qrCode) {
+        let codediv = document.querySelector(".epsilon");
+        codediv.innerHTML = `<input value='${qrCode}' name='qr_code' style="display : none;">`;
+
+        let button = document.querySelector(".eps");
+        button.addEventListener("click", function () {
+            document.querySelector("form[name='form1']").submit();
+        });
+    }
+
+    function QrCodeGen() {
+        let codeqr = generateRandomCode(40);
+        updateQRCodeDisplay(codeqr);
+        submitFormWithQRCode(codeqr);
+    }
+</script>
+{% endblock %}
+</body>
+</html>

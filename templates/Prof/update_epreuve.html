@@ -1,0 +1,43 @@
+{% include 'Prof/ProfElearning.html'%}
+{%load static%}
+{%block content%}
+<style>
+
+.messages {
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .success {
+    color: green;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+ 
+
+</style>
+ 
+    <section class="home-section">
+        
+            {% if message.tags == 'success' %}
+            <script>alert("{{ message }}")</script>
+            <!-- {% elif message.tags == 'error' %}
+            <p class="error">{{ message }}</p> -->
+            {% endif %}
+        
+       
+            <div class="form">      
+              <form method="post" action="{% url 'updateepreuve' epreuve.id_epreuve%}">
+                  {% csrf_token %}
+                  {{form.as_p}}
+                  <button type="submit" name="save" value="save">Save</button>
+                  <a href="{% url 'epreuves' %}?" role="button" data-dismiss="modal">Cancel</a>
+              
+              </form>
+        
+          </div></section>
+    {%endblock content%}

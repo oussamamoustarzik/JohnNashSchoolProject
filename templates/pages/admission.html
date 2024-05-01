@@ -1,0 +1,84 @@
+{% extends 'base.html'%}
+{%load static%}
+
+{%block content%}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pre-Registration Form</title>
+</head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F5F5F5;
+
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            font-size:15px;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .form-container input[type="text"],
+        .form-container select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #CCCCCC;
+            border-radius: 3px;
+            margin-bottom: 15px;
+        }
+
+        .form-container button[type="submit"] {
+            background-color: #4CAF50;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .form-container button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</br></br></br></br></br></br></br></br></br>
+<body>
+  <h1>Admission Form</h1>
+  </br></br>
+    <div class="form-container">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <label for="id_nom">Family Name:</label>
+            {{ form.nom }}
+            <label for="id_prenom">First Name:</label>
+            {{ form.prenom }}
+            <label for="id_cne">CNE:</label>
+            {{ form.cne }}
+            <label for="id_level">Level:</label>
+            {{ form.level }}
+            <label for="id_age">Age:</label>
+            {{ form.age }}
+            <label for="id_ancienne_ecole">Old school(if it exists):</label>
+            {{ form.ancienne_ecole }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</br></br></br>
+</html>
+{%endblock%}

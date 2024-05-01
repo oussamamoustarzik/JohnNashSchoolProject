@@ -1,0 +1,182 @@
+{% include 'Eleve/EleveElearning.html' %}
+{% load static %} 
+
+{% block content %}
+<style>
+    /* CSS styles for the attendance list */
+    .home-section {
+      padding: 20px;
+      background-color: #f7f7f7;
+    }
+    
+    .attendance-list {
+      margin: 0 auto;
+      max-width: 800px;
+    }
+    
+    .attendance-list h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    thead th {
+      padding: 10px;
+      background-color: #82ffe4;
+      text-align: left;
+    }
+    
+    tbody td {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    
+    .pagination {
+      margin-top: 20px;
+      text-align: center;
+    }
+    
+    .step-links {
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    
+ a {
+  margin-right: 5px;
+  color: #333;
+  text-decoration: none;
+  
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+}
+
+thead th {
+  padding: 10px;
+  background-color: #f2f2f2;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.step-links a:hover {
+  text-decoration: underline;
+}
+
+.step-links .current {
+  font-weight: bold;
+  color: #555;
+}
+
+.step-links .disabled {
+  color: #ccc;
+  pointer-events: none;
+}
+    .step-links a {
+      margin-right: 5px;
+      color: #333;
+      text-decoration: none;
+    }
+    
+    .step-links a:hover {
+      text-decoration: underline;
+    }
+    </style>
+<section class="home-section">
+    <div class="attendance-list">
+        <h1>Liste des cours de la classe : {{classe}}</h1>
+        <div class="form-group">
+            <input id="search" class="form-control" type="text" placeholder="Search.....">
+        </div> 
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>Professeur</th>
+                    <th>Matiere</th>
+                    <th>Sous Matiere</th>
+                    <th>Coefficient</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                <tr>
+                    {% for enseigne in enseignes %}
+                    <td>{{ enseigne.Id_professeur }}</td>
+                    <td> {{enseigne.Id_matiere}}</td>
+                    <td>  <div>
+                        {% for sous_matiere in sous_matieres %}
+                        {% if sous_matiere.matiere == enseigne.Id_matiere %}
+                        {{ sous_matiere }}
+                        
+                         <br>{% endif %}
+                          {% endfor %}
+                             </div>
+                       </td>
+                       <td>  <div>
+                        {% for sous_matiere in sous_matieres %}
+                        {% if sous_matiere.matiere == enseigne.Id_matiere %}
+                        {{ sous_matiere.coefficient }}
+                        
+                         <br>{% endif %}
+                          {% endfor %}
+                             </div>
+                       </td>
+                    <td>  <div>
+                        {% for sous_matiere in sous_matieres %}
+                        {% if sous_matiere.matiere == enseigne.Id_matiere %}
+                        <a href="{% url 'coursstudent' %}?matiere={{ enseigne.Id_matiere }}&sous_matiere={{ sous_matiere }}">Liste des cours</a>
+                        
+                         <br>{% endif %}
+                          {% endfor %}
+                             </div>
+                       </td>
+                   
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+      <!--Pagination-->
+      <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+  
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+  
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+  <!--EndPagination-->    
+      </div>
+        </section>
+  
+  {% endblock content %}

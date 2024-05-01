@@ -1,0 +1,42 @@
+{% include 'EleveElearning.html' %}
+{% load static %} 
+
+{% block content %}
+<style>
+    .attendance-list {
+        margin: 20px;
+    }
+
+    .view-timetable-link {
+        display: inline-block;
+        margin-top: 10px;
+        color: #000;
+        text-decoration: none;
+        background-color: #ccc;
+        padding: 10px 20px;
+        border-radius: 5px;
+    }
+
+    .view-timetable-link:hover {
+        background-color: #aaa;
+    }
+
+    .timetable-message {
+        margin-top: 20px;
+        font-size: 16px;
+        color: #333;
+    }
+</style>
+
+<section class="attendance">
+    <div class="attendance-list">
+        <h1>Timetable for Class: {{ classe }}</h1>
+        <div class="timetable-container">
+            <embed src="{{ emploie_temps.url }}" type="{{ emploie_temps.content_type }}" />
+        </div>
+        <a href="{{ classe.emploie_temps.url }}" class="view-timetable-link">View Timetable</a>
+        <p class="timetable-message">Please find attached your timetable. Please review it, print it, and follow the instructions provided.</p>
+    </div>
+</section>
+
+{% endblock content %}

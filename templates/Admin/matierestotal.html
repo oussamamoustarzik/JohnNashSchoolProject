@@ -1,0 +1,149 @@
+{% include 'Admin/AdminElearning.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="home-section">
+    <section class="main">
+        <section class="attendance">
+            <div class="attendance-list">
+                <h1>Liste des matières de tous les niveaux</h1>
+                <a class="add" href="{% url 'addmatiere' %}">ADD NEW</a>
+                <div class="form-group">
+                    <input id="search" class="form-control" type="text" placeholder="Search.....">
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id Matière</th>
+                            <th>Nom Matière</th>
+                            <th>Coefficient Matière</th>
+                            <th>Associé ou non</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myTable">
+                        {% for matiere in matieres %}
+                        <tr>
+                            <td>{{ matiere.id_matiere }}</td>
+                            <td>{{ matiere.nom_matiere }}</td>
+                            <td>{{ matiere.coefficient }}</td>
+                            <td>
+                                <div>
+                                    {% for enseigne in enseignes %}
+                                    {% if enseigne.Id_matiere == matiere %}
+                                    {{ enseigne.Id_classe }} <br>
+                                    {% endif %}
+                                    {% empty %}
+                                    <p>NA</p>
+                                    {% endfor %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+          <!--Pagination-->
+        <div class="pagination">
+          <span class="step-links">
+              {% if page_obj.has_previous %}
+              <a href="?page=1">&laquo; first</a>
+              <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+              {% endif %}
+    
+              <span class="current">
+                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              </span>
+    
+              {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}">next</a>
+              <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+          </span>
+      </div>
+    <!--EndPagination-->    
+        </div>
+    </section>
+</section>
+
+<style>
+    .main {
+        padding: 20px;
+    }
+
+    .attendance-list {
+        background-color: #f7f7f7;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .add {
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f7f7f7;
+        font-weight: bold;
+    }
+
+    .pagination {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .step-links a {
+        padding: 4px 8px;
+        text-decoration: none;
+        background-color: #f7f7f7;
+        color: #007bff;
+        border-radius: 4px;
+        margin-right: 4px;
+    }
+
+    .current {
+        padding: 4px 8px;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 4px;
+        margin-right: 4px;
+    }
+</style>
+
+{% endblock content %}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student List</title>
+    {% include 'Prof/ProfElearning.html' %}
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #337ab7;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #23527c;
+        }
+
+        .home-section {
+            padding: 20px;
+        }
+        .download-link {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #4caf50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .download-link:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<section class="home-section">
+    <h2>Student List for Devoir: {{ devoir.description }}</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Nom </th>
+            <th>Homework File</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for devoir_contenue in devoir_contenues %}
+        <tr>
+            <td>{{ devoir_contenue.CNE_eleve }}</td>
+            <td>
+                {% if devoir_contenue.homework_file %}
+                    <a href="{{ devoir_contenue.homework_file.url }}" target="_blank" class="download-link">View</a>
+                {% else %}
+                    No file submitted
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">No submissions</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+</body>
+</html>

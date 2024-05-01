@@ -1,0 +1,82 @@
+{% include 'Prof/ProfElearning.html'%}
+{%load static%}
+
+
+{%block content%}
+
+<section class="attendance">
+    <form method="post" action="{% url 'addnote' %}?epreuve={{epreuve}}">
+        {% csrf_token %}{% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+         <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+        </ul>{% endif %}
+    <div class="attendance-list">
+        <h1>Liste des eleves</h1>
+        <div class="form-group">
+            <input id="search" class="form-control" type="text" placeholder="Search.....">
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Eleve</th>
+                    <th>note </th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                {% for eleve in eleve_list %}
+                <tr>
+                    <td>{{ eleve.compte }}</td>
+                    <td>
+                                      
+                    <input type="number" id="gradeInput" maxlength="4" min="0" max="20"  name="note_{{ eleve.cne_eleve }}" class="note-input"  {% for passe in val %}{% if eleve.cne_eleve ==  passe.CNE_eleve.cne_eleve%} value="{{ passe.Note }}"  disabled {%endif%}{% endfor %} />                            
+                        
+                    </td>
+                    <td><a href="#" onclick="enableInput(this)">Edit</a></td>                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><button type="submit" name="save" value="save">Save</button></td>
+                    <p id="resultMessage"></p>
+                </tr>
+            </tfoot>
+        </table>
+        <!--Pagination-->
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        <!--EndPagination-->
+    </div>
+    </form>
+</section>
+
+
+<script>
+    function enableInput(link) {
+        var input = link.parentNode.previousElementSibling.querySelector('.note-input');
+        input.disabled = false;
+    }
+
+
+
+
+    </script>
+{%endblock content%}

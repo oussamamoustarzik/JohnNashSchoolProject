@@ -1,0 +1,87 @@
+{% include 'Prof/ProfElearning.html'%}
+    
+{% load static %} 
+
+{%block content%}
+
+<section class="home-section">
+<h1 class="title">Update S.Matiere</h1>
+<div class="form">      
+  <form method="post" action="{% url 'updatessmatiere'     ssmatieres.id_sousmatiere %}" class="box" >
+      {% csrf_token %}
+      {{formssmatiere.as_p}}
+      <button type="submit" name="save" value="save" class="btn-save">Save</button>
+      <a href="{% url 'sousmatieres_professeur' %}" role="button" data-dismiss="modal" class="btn-cancel">Cancel</a>
+  
+  </form>
+
+</div></section> <style>
+  .title {
+text-align: center;
+font-size: 24px;
+margin-bottom: 20px;
+}
+.form {
+width: 800px;
+margin: 0 auto;
+}
+
+.box {
+background-color: #f6f6fc;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.box p {
+margin-bottom: 10px;
+}
+
+.box input[type="text"],
+.box input[type="Number"],.box input[type="Email"],select {
+width: 100%;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 3px;
+font-size: 16px;
+transition: border-color 0.3s ease;
+}
+
+.box input[type="text"]:focus,
+.box input[type="Number"]:focus {
+outline: none;
+border-color: #4CAF50;
+box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.btn-save,
+.btn-cancel {
+display: inline-block;
+padding: 8px 16px;
+margin-right: 10px;
+text-decoration: none;
+border-radius: 3px;
+cursor: pointer;
+color: #fff;
+}
+
+.btn-save {
+background-color: #4CAF50;
+border: none;
+}
+
+.btn-save:hover {
+background-color: #45a049;
+}
+
+.btn-cancel {
+background-color: #888;
+border: none;
+}
+
+.btn-cancel:hover {
+background-color: #555;
+}
+
+</style>
+        {%endblock content%}

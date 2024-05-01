@@ -1,0 +1,122 @@
+{% include 'Eleve/EleveElearning.html' %}
+{% load static %} 
+
+{% block content %}
+<style>
+.attendance-list {
+  margin: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  padding: 10px;
+  background-color: #f2f2f2;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.step-links {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.step-links a {
+  margin-right: 5px;
+  color: #333;
+  text-decoration: none;
+}
+
+.step-links a:hover {
+  text-decoration: underline;
+}
+</style>
+<section class="home-section">
+
+  <div class="attendance-list">
+    <h1>Liste des Cours pour l'élève : {{ Eleve }} de classe : {{ Classe }}</h1>
+    <div class="form-group">
+      <input id="search" class="form-control" type="text" placeholder="Search.....">
+    </div> 
+
+    <table>
+      <thead>
+        <tr>
+          <th>libelle</th>
+          <th>lien_cours</th>
+          <th>pdf_cours</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="myTable">
+        {% for courss in cours_list %}
+        <tr>
+          <td>{{ courss.libelle }}</td>
+          <td><a href="{{ courss.lien_cours }}">{{ courss.lien_cours }}</a></td>
+          <td>{{ courss.pdf_cours }}</td>
+          <td>
+            <div>  
+              {% if courss.pdf_cours %}
+              <a href="{{ courss.pdf_cours.url }}" download>Download</a>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!--Pagination-->
+    <div class="pagination">
+      <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+      </span>
+    </div>
+    <!--EndPagination-->    
+  </div>
+</section>
+
+{% endblock content %}

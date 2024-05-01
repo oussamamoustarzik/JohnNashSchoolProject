@@ -1,0 +1,78 @@
+{% include 'Prof/ProfElearning.html'%}
+
+{%load static%}
+
+
+{%block content%}
+
+      <section class="attendance">
+        <div class="attendance-list">
+          <h1>Liste des eleves</h1>
+         <div class="form-group">
+            <input id="search"  class="form-control"  type="text" placeholder="Search.....">
+        </div>  
+    
+    <table>
+        <thead>
+            <tr>
+                 
+                <th>Id </th>
+                <th>Eleve</th>   
+                <th>CNE </th>
+                <th>Parent </th>
+                <th>Classe </th>
+                <th>Action</th>
+                
+            </tr>
+        </thead>
+        <tbody id="myTable">
+          {% if eleve_list %}
+            {% for eleve in eleve_list  %}
+            <tr>
+                <td>{{ eleve.compte_id}}</td>
+                <td>{{  eleve.compte}}</td>
+                <td>{{ eleve.cne_eleve}}</td>
+                <td>{{  eleve.cin_parent}}</td>
+                <td>{{  eleve.id_classe_id }}</td>
+                <td>
+                  <div >  
+                     <a href="{% url 'notesProf'  %}?cne_eleve={{ eleve.cne_eleve }}"  role="button" >View Notes</a>
+                  </div>
+                </td>
+              
+                
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="7">Aucun eleve existant</td>
+            </tr>
+        {% endif %}
+        </tbody>
+       
+    </table>
+    <!--Pagination-->
+    <div class="pagination">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+          {% endif %}
+
+          <span class="current">
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+          </span>
+
+          {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">next</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
+      </span>
+  </div>
+<!--EndPagination-->    
+      </div>
+      </section>
+
+    
+
+{%endblock content%}

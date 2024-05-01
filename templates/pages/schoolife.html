@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+    {% load static %}
+{% block content %}
+    
+
+    <section class="schoolife" id="schoolife">
+
+        <h1 class="heading">JohnNash Elementary School</h1>
+       <div class="container" id="desc">
+        <p> At Jhon Nash Primary and College, we are committed to providing a comprehensive and exceptional educational experience that supports the needs of both students and parents. We believe that by offering high-quality services such as daycare, cafeteria, transportation, and medical services, we can help parents feel confident in their decision to entrust their child's education to us.</p>
+       </div>
+        <div class="container">
+
+           
+
+            <div class="schoolife-content" style="margin-top: 30px;">
+                
+                <h3>Transportation:</h3>
+                <p>Our transportation service provides safe and reliable transportation to and from school for students who require it. Our drivers are trained professionals who prioritize the safety and comfort of our students, and our fleet of vehicles is regularly maintained to ensure optimal performance and safety.</p>
+                  
+            </div>
+             <figure class="schoolife-image">
+                <img src="{% static 'image/pngegg(9).png' %}" alt="" height="550" id="transport" >
+              
+            </figure>
+
+        </div>
+        <div class="container">
+            
+            <figure class="schoolife-image">
+             
+                <img src="{% static 'image/pngegg(11).png' %}" alt="" height="400" id="cafeteria">
+         
+            </figure>
+
+            <div class="schoolife-content">
+                
+                <h3>Cafeteria:</h3>
+                     <p>Our cafeteria provides healthy and delicious meals that are prepared on-site by our trained chefs using fresh, locally-sourced ingredients. We offer a range of options to accommodate all dietary needs and preferences, ensuring that your child has access to nutritious and tasty meals throughout the day.</p>
+
+            </div>
+
+
+        </div>
+        <div class="container">
+
+           
+            <div class="schoolife-content" style="margin-left: 33rem;">
+          
+                     <h3>Daycare: </h3>
+                     <p>We offer before and after-school daycare for parents who need additional support with childcare. Our team of childcare professionals is highly qualified and experienced, ensuring that your child is safe and happy in our care.</p> 
+                 
+            </div>
+             <figure class="schoolife-image">
+      
+                <img src="{% static 'image/pngegg(12).png' %}" alt="" height="300" id="daycare">
+            </figure>
+
+
+        </div>
+    </section>
+
+   
+
+
+   
+
+
+    
+    {% endblock content %}
+
+
+
+
+
+
+
+
+
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- custom js -->
+    <script src="js/script.js"></script>
+</body>
+</html>

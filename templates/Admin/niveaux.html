@@ -1,0 +1,54 @@
+{% extends 'Admin/AdminElearning.html'%}
+{%load static%}
+{%block content%}
+  <div class="service" id="diag" style="margin-top:20px;">
+		<div class="boxx">
+
+            <div class="cardd" style="margin-top: 286px;">
+            </br></br>
+            <h5><a href="{% url 'classes' %}?niveau=PS">PS</a></h5>
+        </div>
+
+			<div class="cardd">
+                </br></br>
+				<h5><a href="{% url 'classes' %}?niveau=MS">MS</a></h5>
+			</div>
+
+            <div class="cardd" style="margin-top: 286px;">
+            </br></br>
+            <h5><a href="{% url 'classes' %}?niveau=GS">GS</a></h5>
+            </div>
+             
+           <div class="cardd">
+            </br></br>
+           <h5> <a href="{% url 'classes' %}?niveau=CP">CP</a></h5>
+            </div>
+
+         <div class="cardd" style="margin-top: 286px;">
+           </br></br>
+            <h5><a href="{% url 'classes' %}?niveau=CE1">CE1</a></h5>
+            </div>
+
+            <div class="cardd">
+            </br></br>
+            <h5><a href="{% url 'classes' %}?niveau=CE2">CE2</a></h5>
+            </div>
+
+            <div class="cardd" style="margin-top: 286px;" >
+            </br></br>
+            <h5><a href="{% url 'classes' %}?niveau=CM1">CM1</a></h5>
+            </div>
+
+            <div class="cardd">
+            </br></br>
+            <h5><a href="{% url 'classes' %}?niveau=CM2">CM2</a></h5>
+            </div>
+
+            <div class="cardd" style="margin-top: 286px;">
+            </br></br>
+            <h5><a href="{% url 'classes' %}?niveau=CE6">CE6</a></h5>
+            </div>
+		</div>
+	</div>
+
+{%endblock content%} 

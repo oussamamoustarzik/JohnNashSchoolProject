@@ -1,0 +1,17 @@
+{% include 'Admin/AdminElearning.html'%}
+{%load static%}
+{%block content%}
+
+    
+<section class="home-section">
+  <div class="form">      
+    <form method="post" action="{% url 'updateclasse' classe.id_classe %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" name="save" value="save">Save</button>
+        <a href="{% url 'classes' %}?niveau={{ classes.niveau_classe }}" role="button" data-dismiss="modal">Cancel</a>
+    
+    </form>
+
+</div></section>
+{%endblock content%}

@@ -1,0 +1,196 @@
+{% extends 'base.html'%}
+{%load static%}
+
+
+{%block content%}
+    <!-- home section starts-->
+
+    <section class="home" id="home">
+
+        <div class="content">
+            <h3>Welcome to JohnNash School</h3>
+            <p>The best courses you will find here.</p>
+            <a href="{% url 'demande_recrutement' %}" class="btn">
+                <span class="text text-1">Send Recruitment Request</span>
+                <span class="text text-2" aria-hidden="true">Send Recruitment Request</span>
+            </a>    
+        </div>
+
+    </section>
+
+    <!-- home section ends -->
+
+    <!-- about section starts -->
+
+    <section class="about" id="about">
+
+        <h1 class="heading">Welcome to Jhon Nash Primary</h1>
+
+        <div class="container">
+
+            <figure class="about-image">
+                <img src="{% static 'image/3.jpg'%}" alt="" height="500">
+                <img src="{% static 'image/about-1.jpg'%}" alt="" class="about-img">
+            </figure>
+
+            <div class="about-content">
+                <h3>Where we are dedicated to providing an exceptional educational experience for our students.</h3>
+                <p>
+                    At Jhon Nash, we prioritize academic excellence and offer a challenging curriculum that prepares our students for success in higher education and in life. Our experienced and highly qualified teachers are committed to creating a nurturing and supportive environment that promotes both intellectual and personal growth.
+                    
+                    </p>
+                <p>
+                    Our facilities are state-of-the-art, with modern classrooms, science labs, and technology centers that enable our students to explore their passions and interests in a dynamic and engaging way. We also offer a wide range of extracurricular activities, including sports teams, music and arts programs, and community service opportunities, which help our students develop leadership skills, social responsibility, and a well-rounded perspective on the world.</p>    
+                <a href="{% url 'johnnash' %}" class="btn">
+                    <span class="text text-1">read more</span>
+                    <span class="text text-2" aria-hidden="true">read more</span>
+                </a>        
+            </div>
+
+        </div>
+    </section>
+  
+    <!-- about section ends -->
+
+     <!-- about section starts -->
+
+   <br><br><br>
+   
+  <!-- review section starts -->
+
+  <section class="review" id="review" style="background-image: linear-gradient( rgb(241, 223, 139), rgb(185, 134, 202),rgb(85, 149, 209));">
+
+    <h1 class="heading">Why JohnNash School</h1>
+
+    <div class="swiper review-slider">
+
+
+        <div class="swiper-wrapper">
+           
+            <div class="swiper-slide slide" > 
+               
+                <p> A differentiated linguistic approach through a 50/50 French-English curriculum for all school students.</p>
+                <div class="wrapper">
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                </div>
+                <div class="user">
+                   
+                    <div class="user-info">
+                        <h3>Bilingual Education</h3>
+                     
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <p>  Academic excellence led by quality teachers who are driven by a rigorous spirit of discipline and performance.</p>
+                <div class="wrapper">
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                </div>
+                
+                <div class="user">
+                  
+                    <div class="user-info">
+                        <h3>High-quality education</h3>
+                       
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <p>Student development through a rich and varied program of academic and extracurricular activities.</p>
+                <div class="wrapper">
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                </div>
+                
+                <div class="user">
+                   
+                    <div class="user-info">
+                        <h3>Fostering Academic Excellence</h3>
+                     
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <p>An openness to others and the world by nurturing a spirit of curiosity and a hunger for discovery.</p>
+                <div class="wrapper">
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                </div>
+               
+                <div class="user">
+                   
+                    <div class="user-info">
+                        <h3>Nurturing a Curious Spirit</h3>
+                  
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <p>Innovative learning experience that integrates technology to make your student journey more enriching and fun.</p>
+                <div class="wrapper">
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                </div>
+              
+                <div class="user">
+               
+                    <div class="user-info">
+                        <h3>Technology and Creativity</h3>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <p>Vibrant community that can help you feel supported and encouraged throughout your student journey.</p>
+                <div class="wrapper">
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                </div>
+              
+                <div class="user">
+                   
+                    <div class="user-info">
+                        <h3>Welcoming Community</h3>
+                       
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- review section ends -->
+
+
+    <!-- about section ends -->
+   
+
+{%endblock content%}

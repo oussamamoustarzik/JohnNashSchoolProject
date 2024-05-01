@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+ 
+</head>
+{% include 'Parent/ParentPaiement.html' %}
+<style>
+    /* Import Google Fonts */
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+    * {
+      margin: 0;
+      padding: 0;
+      outline: none;
+      border: none;
+      text-decoration: none;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    body {
+      background: rgb(226, 226, 226);
+    }
+    .container {
+      display: flex;
+    }
+    /* Main Section */
+    .main {
+      position: relative;
+      padding: 20px;
+      width: 100%;
+    }
+    .main-top {
+      display: flex;
+      width: 100%;
+    }
+    .main-top i {
+      position: absolute;
+      right: 0;
+      margin: 10px 30px;
+      color: rgb(110, 109, 109);
+      cursor: pointer;
+    }
+    /* Attendance List Section */
+    .attendance {
+      margin-top: 20px;
+      text-transform: capitalize;
+    }
+    .attendance-list {
+      margin-left: 200px;
+      width: 70%;
+      padding: 10px;
+      margin-top: 10px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+    }
+    .table {
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 15px;
+      min-width: 100%;
+      overflow: hidden;
+      border-radius: 5px 5px 0 0;
+    }
+    table thead tr {
+      color: #fff;
+      background: #aabfe3;
+      text-align: left;
+      font-weight: bold;
+    }
+    .table th,
+    .table td {
+      padding: 12px 15px;
+    }
+    .table tbody tr {
+      border-bottom: 1px solid #ddd;
+    }
+    .table tbody tr:nth-of-type(odd) {
+      background: #f3f3f3;
+    }
+    .table tbody tr.active {
+      font-weight: bold;
+      color: #8DBFB0;
+    }
+    .table tbody tr:last-of-type {
+      border-bottom: 2px solid #8DBFB0;
+    }
+    .table button {
+      padding: 6px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      background: transparent;
+      border: 1px solid #8DBFB0;
+    }
+    .table button:hover {
+      background: #8DBFB0;
+      color: #fff;
+      transition: 0.5s;
+    }
+  </style>
+
+<body>
+    <section class="home-section">
+    
+  <div class="container">
+    <section class="main">
+      <section class="attendance">
+        <div class="attendance-list">
+          {% for entry in classe %}
+          <h1>{{ entry.inclusion.compte.nom }}
+              {{ entry.inclusion.compte.prenom }}</h1>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Payment month</th>
+                  <th scope="col">Date </th>
+                  <th scope="col">Fees</th>
+                  <th scope="col">Service type</th>
+                  <th scope="col">Payment methode</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for student in entry.students %}
+               <tr>
+                    <td>{{ student.mois_paiement }}</td>
+                    <td>{{ student.date_paiement }}</td>
+                    <td>{{ student.montant }}</td>
+                    <td>{{ student.type_service }}</td>
+                    <td>{{ student.modeP }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+{% endfor %}
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+</body>
+</html>

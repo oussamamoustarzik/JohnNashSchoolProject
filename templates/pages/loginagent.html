@@ -1,0 +1,127 @@
+{% load static %}
+
+<html>
+<head>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
+<style>
+    .login-page {
+  width: 450PX;
+  height: 450PX;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+input[type=password], input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #6ae7dd;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #8DBFB0;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #000000;
+  font-size: 28px;
+  font-weight: bolder;
+  text-shadow:   -1px -1px 0 #5a442d,  
+    1px -1px 0 #fcfaf9,
+    -1px 1px 0 #e9e8e8,
+     1px 1px 0 #eeeeee;
+}
+
+.form .register-form {
+  display: none;
+}
+
+body {
+  background-image: url("{% static 'image/backgroundagent.jpg'%}");
+  background-size: cover; 
+  
+  
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+}
+.alert-danger {
+  color: #000000;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  align-content: baseline;
+}
+.messages{
+  list-style: none;
+  align-content: baseline;
+}
+.login-form .messages{
+  align-content: baseline;
+  
+  top: 50%;
+  left: 50%;
+}
+</style>
+
+</head>
+
+<body>
+    <div class="login-page">
+        <div class="form">
+            <p class="message">Agent space </p>
+            <p class ="no-background">
+              <img src="{% static 'image/logoagent1.png' %} " height="110px">
+            <br>
+            <form class="login-form" method="POST" action="{% url 'EspaceAgent' %}" >
+               {% if messages %}
+              <ul class="messages">
+                {% for message in messages %}
+               <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                {% else %}
+              </ul>{% endif %}
+                
+              {% csrf_token %}
+              {{ form.as_p }}
+             
+              <button type="submit">Login</button>
+            </form>
+
+        </div>
+      </div>
+      </div>
+  </body>
+  
+  </html>

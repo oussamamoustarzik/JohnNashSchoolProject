@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HomeWork</title>
+    {% include 'Prof/ProfElearning.html' %}
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #cccccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4582b8;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #337ab7;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #23527c;
+        }
+
+        .home-section {
+            padding: 20px;
+        }
+
+        .ajoute {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .ajoute a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #337ab7;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .ajoute a:hover {
+            background-color: #23527c;
+        }
+        
+        .download-link {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #4caf50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .download-link:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<section class="home-section">
+    <table>
+        <thead>
+        <tr>
+            <th>Id_Devoir</th>
+            <th>Description</th>
+            <th>Instruction</th>
+            <th>Date Limite</th>
+            <th>Class Name</th>
+            <th>Actions</th>
+            <th>Contenue</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for avoi in avoi_list %}
+        <tr>
+            <td>{{ avoi.Id_devoir }}</td>
+            <td>{{ avoi.Id_devoir.description }}</td>
+            <td>{{ avoi.Id_devoir.instruction }}</td>
+            <td>{{ avoi.Id_devoir.date_limite }}</td>
+            <td>{{ avoi.Id_devoir.classe }}</td>
+
+            <td>
+                <a href="{% url 'remove_homework' devoir_id=avoi.Id_devoir.id_devoir %}" class="btn">Remove</a>
+                <a href="{% url 'update_homework' devoir_id=avoi.Id_devoir.id_devoir %}" class="btn">Update</a>
+            </td>
+            <td>
+                <a href="{% url 'student_list' devoir_id=avoi.Id_devoir.id_devoir %}" class="btn">View Students</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="ajoute">
+        <a href="{% url 'AddDevoir' %}" class="btn">Add HomeWork</a>
+    </div>
+</section>
+</body>
+</html>

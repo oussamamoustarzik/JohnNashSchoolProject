@@ -1,0 +1,251 @@
+{% include 'Prof/ProfElearning.html'%}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<section class="home-section">
+ 
+  <div class="spinner">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div ><div class="AR"><img src="{% static '/image/goo.png' %}" height="270px" width="270px"></div> 
+  <div class="AR1"><img src="{% static '/image/goo.png' %}" height="270px" width="270px"></div> 
+  <div class="professor-name">
+    <h3 class="title">Welcome, Mr(s). {{ professor_name }}! Check out your class lists.</h3>
+  </div>
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      {% for classe in classeP_list %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <div class="cardd">
+          <div class="cardd-content">
+            <h5><a href="{% url 'eleveProf' %}?classe={{ classe.Id_classe_id }}">{{ classe.Id_classe }}</a></h5>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+<style>
+
+  @keyframes ar{
+  0%   { left:0px; top:0px;}
+  25%  { left:200px; top:0px;}
+  50%  { left:200px; top:200px;}
+  75%  { left:0px; top:200px;}
+  100% { left:0px; top:0px;}
+}
+@keyframes ar1{
+  0%   { right:0px; top:0px;}
+  25%  { right:200px; top:0px;}
+  50%  { right:200px; top:200px;}
+  75%  { right:0px; top:200px;}
+  100% { right:0px; top:0px;}
+}
+  .AR1{
+    position:absolute;
+    right: 95px;
+    animation-name: ar1;
+    animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-delay: 2s;
+  }
+  .AR{
+    position:absolute;
+    left: 95px;
+    animation-name: ar ;
+    animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-delay: 2s;
+    animation-iteration-count: infinite;
+  animation-direction: alternate;
+ 
+  }
+  .image{
+    position: absolute;
+    right: 20px;
+    top: 0;
+  }
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+.home-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.service {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  position: absolute;
+  top: 20px;
+    left: 10rem;
+}
+
+.boxx {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  gap: 20px;
+}
+
+/* Card styles */
+.cardd {
+  background-color: #6399fd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  position: relative;
+  width: 220px;
+  height: 320px;
+  background: mediumturquoise;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.cardd:hover {
+  transform: translateY(-5px);
+}
+
+.cardd-content {
+  padding: 20px;
+}
+
+.cardd h5 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.cardd p {
+  font-size: 14px;
+  color: #777;
+}
+
+.cardd a {
+  text-decoration: none;
+  color: #333;
+}
+.resources-section{
+  position: relative;;
+}
+.spinner {
+    top: 0;
+    width: 70.4px;
+    position: absolute;
+    height: 70.4px;
+    --clr: rgb(247, 197, 159);
+    --clr-alpha: rgb(247, 197, 159,.1);
+    animation: spinner 1.6s infinite ease;
+    transform-style: preserve-3d;
+    right: 75px;}
+
+.spinner > div {
+  background-color: var(--clr-alpha);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  border: 3.5px solid var(--clr);
+}
+
+.spinner div:nth-of-type(1) {
+  transform: translateZ(-35.2px) rotateY(180deg);
+}
+
+.spinner div:nth-of-type(2) {
+  transform: rotateY(-270deg) translateX(50%);
+  transform-origin: top right;
+}
+
+.spinner div:nth-of-type(3) {
+  transform: rotateY(270deg) translateX(-50%);
+  transform-origin: center left;
+}
+
+.spinner div:nth-of-type(4) {
+  transform: rotateX(90deg) translateY(-50%);
+  transform-origin: top center;
+}
+
+.spinner div:nth-of-type(5) {
+  transform: rotateX(-90deg) translateY(50%);
+  transform-origin: bottom center;
+}
+
+.spinner div:nth-of-type(6) {
+  transform: translateZ(35.2px);
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
+  }
+
+  50% {
+    transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
+  }
+
+  100% {
+    transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
+  }
+}
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .boxx {
+    justify-content: flex-start; /* Align cards to the left on small screens */
+  }
+}
+</style>
+{% endblock content %}

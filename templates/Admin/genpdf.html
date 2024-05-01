@@ -1,0 +1,111 @@
+
+{% block content %}
+<style>
+  .card {
+      margin: 10px 0px 10px 10px;
+      box-shadow: none;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      -ms-box-shadow: none;
+      transition: background 0.25s ease;
+      -webkit-transition: background 0.25s ease;
+      -moz-transition: background 0.25s ease;
+      -ms-transition: background 0.25s ease;
+      border: none;
+  }
+  .row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -45px;
+  margin-left: -15px;
+}
+  .card .card-body {
+      padding: 20px 0px 30px 40px;
+  }
+  .col-sm-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+    margin-top: 15px;
+    padding: 0px 40px;
+  }
+  .col-md-6 input[type='radio']{
+    padding-left: 15px;
+    margin: 10px 50px 20px 80px;
+  }
+</style>
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-12 grid-margin">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Payment Register</h4>
+            <form class="form-sample" method="post" action="{% url 'paiement' %}">
+              {% csrf_token %}
+              <p class="card-description">
+                Personal info
+              </p>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Montant</label>
+                    <div class="col-sm-9">
+                      {{ form.montant }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Mode de paiement</label>
+                    <div class="col-sm-9">
+                      {{ form.modeP }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Type de service</label>
+                    <div class="col-sm-9">
+                      {{ form.type_service }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Mois </label>
+                    <div class="col-sm-9">
+                      {{ form.mois_paiement }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Eleve</label>
+                    <div class="col-sm-9">
+                      {{ form.eleve_nom_prenom }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Date</label>
+                    <div class="col-sm-9">
+                      {{ form.date_paiement }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <button type="submit" class="btn btn-primary">Générer le PDF</button>
+              </div>
+            </form>
+            
+                
+
+</form>
+
+{% endblock content %}

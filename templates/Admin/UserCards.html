@@ -1,0 +1,250 @@
+{% load static%}
+{% include 'Admin/AdminElearning.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+  <style>
+    /* Container styles */
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+    @keyframes slide-up {
+  0% {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+    /* Card styles */
+    .card {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #8d8282;
+  border-radius: 50%; /* Use 50% border-radius to create a circle */
+  padding: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .card-buttons {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .card-buttons a {
+      display: inline-block;
+      padding: 5px 10px;
+      border: 1px solid #d0e7ee;
+      border-radius: 5px;
+      text-decoration: none;
+      color: inherit;
+      transition: background-color 0.3s;
+    }
+
+    .card-buttons a:hover {
+      background-color: #676b6d;
+    }
+
+    /* Animation keyframes */
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  @keyframes color-transition {
+  0% {
+    background-color: #FFC107; /* Initial color */
+  }
+  50% {
+    background-color: #F44336; /* Transition color */
+  }
+  100% {
+    background-color: #FFC107; /* Final color */
+  }
+}
+    /* Animation class */
+    .animated {
+      animation-fill-mode: both;
+    }
+
+    /* Animate card on hover */
+    .card:hover {
+      animation-name: fade-in;
+      animation-duration: 0.3s;
+      animation-timing-function: ease-out;
+    }
+
+    /* Professional colors */
+    .card.admin {
+      background-color: #2979FF;
+    }
+
+    .card.parents {
+      background-color: #8C9EFF;
+    }
+
+    .card.students {
+      background-color: #80CBC4;
+    }
+
+    .card.agents {
+      background-color: #FFD54F;
+    }
+
+    .card.professors {
+      background-color: #FF8A65;
+    }
+    @keyframes slide-in {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+#animated-heading {
+  animation: slide-in 1s ease-in-out forwards;
+}
+.list-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:30vh;
+}
+.animated-list li {
+    opacity: 0; 
+    animation: fadeIn 1s ease-in-out forwards; 
+}
+@keyframes fadeIn {
+    to {
+        opacity: 1; 
+    }
+}
+
+  </style>
+</head>
+<body>
+    
+  <section class="home-section"><br><br><br><br><br><br><br><br>
+<h1 style="text-align: center; margin-bottom: 30px;" id="animated-heading">ADD</h1>
+    
+
+
+
+
+    <div class="container">
+      <!-- User Cards -->
+      <div class="card animated admin">
+        <br><br>
+        <h2>Admins</h2>
+        <div class="card-buttons">
+          <a href="{% url 'admins' %}">Add</a>
+        </div>
+      </div>
+
+      <div class="card animated parents">
+        <br><br>
+        <h2>Parents</h2>
+        <div class="card-buttons">
+          <a href="{% url 'parents' %}">Add</a>
+        </div>
+      </div>
+
+      <div class="card animated students">
+        <br><br>
+        <h2>Students</h2>
+        <div class="card-buttons">
+          <a href="{% url 'eleves' %}">Add</a>
+        </div>
+      </div>
+
+      <div class="card animated agents">
+        <br><br>
+        <h2>Agents</h2>
+        <div class="card-buttons">
+          <a href="{% url 'agents' %}">Add</a>
+        </div>
+      </div>
+
+      <div class="card animated professors">
+        <br><br>
+        <h2>Professors</h2>
+        <div class="card-buttons">
+          <a href="{% url 'profs' %}">Add</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Include Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script>// script.js
+
+    const listItems = document.querySelectorAll(".container");
+    const typingSpeed = 200; // Adjust typing speed (in milliseconds)
+    
+
+    
+    function typeListItems() {
+        listItems.forEach((item) => {
+            const itemText = item.textContent;
+            item.textContent = "";
+            let charIndex = 0;
+    
+            function typeCharacter() {
+                if (charIndex < itemText.length) {
+                    item.textContent += itemText.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeCharacter, typingSpeed);
+                }
+            }
+    
+            typeCharacter();
+        });
+    }
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        typeHeading();
+        typeListItems();
+    });
+    </script>
+</body>
+</html>
