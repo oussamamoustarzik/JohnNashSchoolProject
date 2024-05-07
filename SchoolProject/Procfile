@@ -1,1 +1,1 @@
- web: gunicorn SchoolProject
+ web: gunicorn SchoolProject.wsgi
